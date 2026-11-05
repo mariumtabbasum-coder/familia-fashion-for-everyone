@@ -74,7 +74,7 @@ export const CartPage: React.FC = () => {
   const finalTotal = Math.max(0, cartTotal - promoDiscount);
 
   return (
-    <div className="py-8 sm:py-12 bg-[#F8FBFA] min-h-[70vh]" aria-label="Shopping Cart">
+    <div role="region" className="py-8 sm:py-12 bg-[#F8FBFA] min-h-[70vh]" aria-label="Shopping Cart">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-[#D9E8EC] gap-4">

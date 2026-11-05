@@ -72,7 +72,7 @@ export const ProductDetailPage: React.FC = () => {
   ).slice(0, 4);
 
   return (
-    <div className="py-8 bg-[#F8FBFA]" aria-label="Product Details Page">
+    <div role="region" className="py-8 bg-[#F8FBFA]" aria-label="Product Details Page">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation matching Screen 3 */}
         <nav className="flex items-center gap-1.5 text-xs text-[#607985] mb-8 overflow-x-auto no-scrollbar py-1" aria-label="Breadcrumb">
@@ -439,9 +439,9 @@ export const ProductDetailPage: React.FC = () => {
         {relatedProducts.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-2xl font-bold text-[#254653]">
+              <h2 className="font-serif text-2xl font-bold text-[#254653]">
                 You May Also Like
-              </h3>
+              </h2>
               <button
                 onClick={() => navigateTo(`/${product.category}`)}
                 className="text-xs font-semibold text-[#477C82] hover:text-[#254653] flex items-center gap-1 cursor-pointer"

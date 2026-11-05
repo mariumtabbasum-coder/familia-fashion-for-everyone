@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white rounded-2xl border border-[#D9E8EC] overflow-hidden hover:border-[#477C82]/30 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer"
+      className="product-card group min-w-0 bg-white rounded-2xl border border-[#D9E8EC] overflow-hidden hover:border-[#477C82]/30 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer"
     >
       {/* Product Image Container with Secondary Hover Image Reveal - 3:4 portrait ratio prevents heads/dresses cropping */}
       <div className="relative aspect-[3/4] bg-[#F0F7F8] overflow-hidden">
@@ -43,10 +43,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
           src={selectedColor?.image || product.images[0]}
           alt={product.name}
           referrerPolicy="no-referrer"
-          className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out ${
+          className={`w-full h-full object-contain object-center transition-transform duration-700 ease-out ${
             hasSecondaryImage ? 'group-hover:scale-105' : 'group-hover:scale-105'
           }`}
           loading="lazy"
+          decoding="async"
+          fetchPriority="low"
         />
 
         {/* Secondary Image Reveal on Hover */}
@@ -55,8 +57,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
             src={product.images[1]}
             alt={`${product.name} alternate view`}
             referrerPolicy="no-referrer"
-            className="absolute inset-0 w-full h-full object-cover object-top opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-contain object-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out group-hover:scale-105"
             loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
         )}
 
@@ -173,12 +177,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
             )}
           </div>
         </div>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-1" onClick={(e) => e.stopPropagation()}>
+        <div className="mt-2 flex items-start justify-between gap-1" onClick={(e) => e.stopPropagation()}>
           <span className="text-[10px] text-[#607985]">Size</span>
-          <div className="flex flex-1 justify-end gap-1">
+          <div className="flex min-w-0 flex-1 flex-wrap justify-end gap-1">
             {product.sizes.slice(0, 5).map((size) => (
               <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size}
-                className={`min-w-6 px-1.5 py-1 rounded-md border text-[9px] font-semibold ${selectedSize === size ? 'bg-[#477C82] text-white border-[#477C82]' : 'bg-white text-[#254653] border-[#D9E8EC]'}`}>
+                className={`min-w-6 px-1 py-1 rounded-md border text-[9px] leading-tight font-semibold ${selectedSize === size ? 'bg-[#477C82] text-white border-[#477C82]' : 'bg-white text-[#254653] border-[#D9E8EC]'}`}>
                 {size}
               </button>
             ))}

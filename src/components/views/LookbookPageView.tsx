@@ -24,7 +24,7 @@ export const LookbookPageView: React.FC = () => {
   };
 
   return (
-    <div className="py-10 bg-[#F8FBFA]" aria-label="Family Lookbook Collections">
+    <div role="region" className="py-10 bg-[#F8FBFA]" aria-label="Family Lookbook Collections">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -90,9 +90,9 @@ export const LookbookPageView: React.FC = () => {
 
             {/* Products inside this look */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#607985]">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#607985]">
                 Matching Pieces in this Set:
-              </h4>
+              </h3>
               <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
                 {currentProducts.map((p) => (
                   <div
@@ -109,9 +109,9 @@ export const LookbookPageView: React.FC = () => {
                         className="w-12 h-14 object-cover rounded-lg bg-gray-100"
                       />
                       <div>
-                        <h5 className="font-serif font-bold text-xs text-[#254653] hover:text-[#477C82]">
+                        <h4 className="font-serif font-bold text-xs text-[#254653] hover:text-[#477C82]">
                           {p.name}
-                        </h5>
+                        </h4>
                         <span className="text-xs font-semibold text-[#254653]">
                           ${p.price.toFixed(2)}
                         </span>

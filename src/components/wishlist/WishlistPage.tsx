@@ -33,7 +33,7 @@ export const WishlistPage: React.FC = () => {
   };
 
   return (
-    <div className="py-8 sm:py-12 bg-[#F8FBFA] min-h-[70vh]" aria-label="My Wishlist">
+    <div role="region" className="py-8 sm:py-12 bg-[#F8FBFA] min-h-[70vh]" aria-label="My Wishlist">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-[#D9E8EC] gap-4">

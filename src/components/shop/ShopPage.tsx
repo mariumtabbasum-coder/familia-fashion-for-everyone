@@ -219,7 +219,7 @@ export const ShopPage: React.FC = () => {
   const hasActiveFilters = selectedSubcategory !== 'all' || selectedSize !== 'all' || onlySale;
 
   return (
-    <div className="py-6 sm:py-10 bg-[#F8FBFA] min-h-screen" aria-label="Shop Catalog">
+    <div role="region" className="py-6 sm:py-10 bg-[#F8FBFA] min-h-screen" aria-label="Shop Catalog">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb Bar */}
@@ -343,6 +343,8 @@ export const ShopPage: React.FC = () => {
                   alt={activeMeta.title}
                   className="w-full h-full object-cover object-[center_20%] lg:object-[center_24%] transition-transform duration-700 ease-out group-hover/heroimg:scale-104"
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
                 {/* Seamless blend gradient on the left edge into the pale mint background matching home header */}
                 <div className="absolute inset-y-0 left-0 w-20 sm:w-28 lg:w-36 bg-gradient-to-r from-[#E2F4F2] via-[#E2F4F2]/60 to-transparent pointer-events-none hidden lg:block" />
@@ -461,6 +463,7 @@ export const ShopPage: React.FC = () => {
               <span className="text-xs text-[#607985] hidden sm:inline font-medium">Sort:</span>
               <div className="relative">
                 <select
+                  aria-label="Sort products"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
                   className="appearance-none bg-[#F8FBFA] hover:bg-white transition-colors border border-[#D9E8EC] hover:border-[#477C82]/60 rounded-xl px-3.5 py-2 pr-8 text-xs font-semibold text-[#254653] outline-none focus:border-[#477C82] cursor-pointer shadow-2xs"
@@ -481,10 +484,10 @@ export const ShopPage: React.FC = () => {
           {/* Desktop Sidebar Filters */}
           <div className="hidden lg:block lg:col-span-3 space-y-6 bg-white rounded-3xl p-6 border border-[#D9E8EC] shadow-xs">
             <div className="flex items-center justify-between pb-4 border-b border-[#D9E8EC]">
-              <h3 className="font-serif font-bold text-base text-[#254653] flex items-center gap-2">
+              <h2 className="font-serif font-bold text-base text-[#254653] flex items-center gap-2">
                 <SlidersHorizontal className="w-4 h-4 text-[#477C82]" />
                 Filters
-              </h3>
+              </h2>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
@@ -497,9 +500,9 @@ export const ShopPage: React.FC = () => {
 
             {/* Subcategories */}
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
                 Category Types
-              </h4>
+              </h3>
               <div className="space-y-1">
                 <button
                   onClick={() => setSelectedSubcategory('all')}
@@ -529,9 +532,9 @@ export const ShopPage: React.FC = () => {
 
             {/* Sizes */}
             <div className="pt-4 border-t border-[#D9E8EC]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
                 Size
-              </h4>
+              </h3>
               <div className="grid grid-cols-3 gap-1.5">
                 <button
                   onClick={() => setSelectedSize('all')}
@@ -578,14 +581,15 @@ export const ShopPage: React.FC = () => {
 
           {/* Product Grid Area */}
           <div className="lg:col-span-9">
+            <h2 className="sr-only">Products</h2>
             {filteredProducts.length === 0 ? (
               <div className="bg-white rounded-3xl border border-[#D9E8EC] p-12 text-center space-y-4 shadow-xs">
                 <div className="w-16 h-16 rounded-full bg-[#F0F7F8] border border-[#CFE6F3] text-[#477C82] flex items-center justify-center mx-auto">
                   <ShoppingBag className="w-7 h-7" />
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-[#254653]">
+                <h2 className="font-serif text-2xl font-bold text-[#254653]">
                   No matching styles found
-                </h3>
+                </h2>
                 <p className="text-sm text-[#607985] max-w-sm mx-auto leading-relaxed">
                   We could not find any items matching your selected criteria. Try resetting your filters to explore more options.
                 </p>
@@ -622,10 +626,10 @@ export const ShopPage: React.FC = () => {
           <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl z-10 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-300">
             <div>
               <div className="p-4 flex items-center justify-between border-b border-[#D9E8EC]">
-                <h3 className="font-serif font-bold text-base text-[#254653] flex items-center gap-2">
+                <h2 className="font-serif font-bold text-base text-[#254653] flex items-center gap-2">
                   <SlidersHorizontal className="w-4 h-4 text-[#477C82]" />
                   Filter Products
-                </h3>
+                </h2>
                 <button
                   onClick={() => setIsMobileFilterOpen(false)}
                   className="p-2 text-gray-400 hover:text-[#477C82] hover:bg-[#F0F7F8] rounded-full transition-colors"
@@ -639,9 +643,9 @@ export const ShopPage: React.FC = () => {
                 {/* Subcategories */}
                 <div>
                   <div className="flex items-center justify-between mb-2.5">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#607985]">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#607985]">
                       Category Types
-                    </h4>
+                    </h3>
                     {selectedSubcategory !== 'all' && (
                       <button
                         onClick={() => setSelectedSubcategory('all')}
@@ -680,9 +684,9 @@ export const ShopPage: React.FC = () => {
 
                 {/* Sizes */}
                 <div className="pt-4 border-t border-[#D9E8EC]">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#607985] mb-2.5">
                     Size
-                  </h4>
+                  </h3>
                   <div className="grid grid-cols-3 gap-1.5">
                     <button
                       onClick={() => setSelectedSize('all')}

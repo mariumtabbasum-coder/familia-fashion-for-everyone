@@ -230,7 +230,7 @@ export const CheckoutModal: React.FC = () => {
                 {/* Recipient Name */}
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <label className="block text-xs font-medium text-[#254653]">
+                    <label htmlFor="checkout-full-name" className="block text-xs font-medium text-[#254653]">
                       Recipient Full Name <span className="text-[#FF8F86]">*</span>
                     </label>
                     {shippingTouched.fullName && !shippingErrors.fullName && (
@@ -240,6 +240,7 @@ export const CheckoutModal: React.FC = () => {
                     )}
                   </div>
                   <input
+                    id="checkout-full-name"
                     type="text"
                     value={fullName}
                     onChange={(e) => {
@@ -269,7 +270,7 @@ export const CheckoutModal: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-email" className="block text-xs font-medium text-[#254653]">
                         Email Address <span className="text-[#FF8F86]">*</span>
                       </label>
                       {shippingTouched.email && !shippingErrors.email && (
@@ -279,6 +280,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-email"
                       type="email"
                       value={email}
                       onChange={(e) => {
@@ -306,7 +308,7 @@ export const CheckoutModal: React.FC = () => {
 
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-phone" className="block text-xs font-medium text-[#254653]">
                         Phone Number <span className="text-[#FF8F86]">*</span>
                       </label>
                       {shippingTouched.phone && !shippingErrors.phone && (
@@ -316,6 +318,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => {
@@ -346,7 +349,7 @@ export const CheckoutModal: React.FC = () => {
                 {/* Street Address */}
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <label className="block text-xs font-medium text-[#254653]">
+                    <label htmlFor="checkout-address" className="block text-xs font-medium text-[#254653]">
                       Street Address <span className="text-[#FF8F86]">*</span>
                     </label>
                     {shippingTouched.address && !shippingErrors.address && (
@@ -356,6 +359,7 @@ export const CheckoutModal: React.FC = () => {
                     )}
                   </div>
                   <input
+                    id="checkout-address"
                     type="text"
                     value={address}
                     onChange={(e) => {
@@ -385,7 +389,7 @@ export const CheckoutModal: React.FC = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-city" className="block text-xs font-medium text-[#254653]">
                         City <span className="text-[#FF8F86]">*</span>
                       </label>
                       {shippingTouched.city && !shippingErrors.city && (
@@ -395,6 +399,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-city"
                       type="text"
                       value={city}
                       onChange={(e) => {
@@ -422,7 +427,7 @@ export const CheckoutModal: React.FC = () => {
 
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-postal" className="block text-xs font-medium text-[#254653]">
                         Postal / ZIP <span className="text-[#607985]">(optional)</span>
                       </label>
                       {shippingTouched.postalCode && postalCode.trim() && !shippingErrors.postalCode && (
@@ -432,6 +437,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-postal"
                       type="text"
                       value={postalCode}
                       onChange={(e) => {
@@ -554,7 +560,7 @@ export const CheckoutModal: React.FC = () => {
                 {/* Cardholder Name */}
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <label className="block text-xs font-medium text-[#254653]">
+                    <label htmlFor="checkout-card-name" className="block text-xs font-medium text-[#254653]">
                       Name on Card <span className="text-[#FF8F86]">*</span>
                     </label>
                     {paymentTouched.cardName && !paymentErrors.cardName && (
@@ -564,6 +570,7 @@ export const CheckoutModal: React.FC = () => {
                     )}
                   </div>
                   <input
+                    id="checkout-card-name"
                     type="text"
                     value={cardName}
                     onChange={(e) => {
@@ -592,7 +599,7 @@ export const CheckoutModal: React.FC = () => {
                 {/* Card Number */}
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <label className="block text-xs font-medium text-[#254653]">
+                    <label htmlFor="checkout-card-number" className="block text-xs font-medium text-[#254653]">
                       Card Number <span className="text-[#FF8F86]">*</span>
                     </label>
                     {paymentTouched.cardNumber && !paymentErrors.cardNumber && (
@@ -602,6 +609,7 @@ export const CheckoutModal: React.FC = () => {
                     )}
                   </div>
                   <input
+                    id="checkout-card-number"
                     type="text"
                     value={cardNumber}
                     maxLength={19}
@@ -633,7 +641,7 @@ export const CheckoutModal: React.FC = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-card-expiry" className="block text-xs font-medium text-[#254653]">
                         Expiration (MM/YY) <span className="text-[#FF8F86]">*</span>
                       </label>
                       {paymentTouched.cardExpiry && !paymentErrors.cardExpiry && (
@@ -643,6 +651,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-card-expiry"
                       type="text"
                       value={cardExpiry}
                       maxLength={5}
@@ -672,7 +681,7 @@ export const CheckoutModal: React.FC = () => {
 
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-xs font-medium text-[#254653]">
+                      <label htmlFor="checkout-card-cvv" className="block text-xs font-medium text-[#254653]">
                         CVV Code <span className="text-[#FF8F86]">*</span>
                       </label>
                       {paymentTouched.cardCvv && !paymentErrors.cardCvv && (
@@ -682,6 +691,7 @@ export const CheckoutModal: React.FC = () => {
                       )}
                     </div>
                     <input
+                      id="checkout-card-cvv"
                       type="password"
                       value={cardCvv}
                       maxLength={4}

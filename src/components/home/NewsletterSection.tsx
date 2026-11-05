@@ -56,7 +56,7 @@ export const NewsletterSection: React.FC = () => {
           {isSuccess ? (
             <div className="bg-[#B8DED0]/30 border border-[#B8DED0] rounded-2xl p-5 text-center text-[#254653] space-y-2 animate-in fade-in duration-300">
               <CheckCircle2 className="w-8 h-8 text-[#477C82] mx-auto" />
-              <h4 className="font-serif font-bold text-base">You&apos;re On the VIP List!</h4>
+              <h3 className="font-serif font-bold text-base">You&apos;re On the VIP List!</h3>
               <p className="text-xs text-[#607985]">
                 Use coupon code <span className="font-bold text-[#254653] bg-white px-2 py-0.5 rounded border border-[#D9E8EC]">FAMILIA15</span> for 15% off your first family order.
               </p>
@@ -118,7 +118,7 @@ export const NewsletterSection: React.FC = () => {
                 <Truck className="w-4 h-4 text-[#477C82]" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-[#254653]">Free Shipping</h5>
+                <h3 className="text-xs font-bold text-[#254653]">Free Shipping</h3>
                 <p className="text-[11px] text-[#607985]">On all orders over $50</p>
               </div>
             </div>
@@ -128,7 +128,7 @@ export const NewsletterSection: React.FC = () => {
                 <ShieldCheck className="w-4 h-4 text-[#477C82]" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-[#254653]">Secure Checkout</h5>
+                <h3 className="text-xs font-bold text-[#254653]">Secure Checkout</h3>
                 <p className="text-[11px] text-[#607985]">Protected payments</p>
               </div>
             </div>
@@ -138,7 +138,7 @@ export const NewsletterSection: React.FC = () => {
                 <RotateCcw className="w-4 h-4 text-[#477C82]" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-[#254653]">30-Day Returns</h5>
+                <h3 className="text-xs font-bold text-[#254653]">30-Day Returns</h3>
                 <p className="text-[11px] text-[#607985]">Hassle-free exchanges</p>
               </div>
             </div>

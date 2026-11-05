@@ -225,6 +225,8 @@ export const HeroSection: React.FC = () => {
                     alt={slide.alt}
                     className="w-full h-full object-cover object-[center_20%] lg:object-[center_24%] transition-transform duration-700 ease-out group-hover/heroimg:scale-104"
                     loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                   {/* Subtle blend gradient on the left edge into the pale mint background */}
                   <div className="absolute inset-y-0 left-0 w-16 sm:w-20 bg-gradient-to-r from-[#E2F4F2] via-[#E2F4F2]/50 to-transparent pointer-events-none hidden lg:block" />

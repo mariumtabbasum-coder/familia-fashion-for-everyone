@@ -42,7 +42,7 @@ export const AboutPageView: React.FC = () => {
   ];
 
   return (
-    <div className="py-6 sm:py-10 bg-[#F8FBFA] text-[#254653]" aria-label="About Familia - Our Story Section">
+    <div role="region" className="py-6 sm:py-10 bg-[#F8FBFA] text-[#254653]" aria-label="About Familia - Our Story Section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
         
         {/* Breadcrumb Navigation */}

@@ -180,8 +180,9 @@ export const AccountPage: React.FC = () => {
   const isSignUpPasswordValid = signUpTouched.password && !signUpErrors.password && REGEX_PASSWORD_SIGNUP.test(signUpPassword);
 
   return (
-    <div className="py-12 bg-[#F8FBFA]" aria-label="Account Section">
+    <div role="region" className="py-12 bg-[#F8FBFA]" aria-label="Account Section">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="sr-only">Your FAMILIA Account</h1>
         {/* Brand Header */}
         <div className="text-center mb-10">
           <FamiliaLogo size="lg" className="justify-center" />

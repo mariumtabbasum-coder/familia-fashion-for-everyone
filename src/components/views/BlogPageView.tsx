@@ -91,7 +91,7 @@ export const BlogPageView: React.FC = () => {
 
   // All Articles Grid
   return (
-    <div className="py-12 bg-[#F8FBFA]" aria-label="Style Guide and Editorial Journal">
+    <div role="region" className="py-12 bg-[#F8FBFA]" aria-label="Style Guide and Editorial Journal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B8DED0]/40 text-[#477C82] text-xs font-semibold uppercase tracking-wider">

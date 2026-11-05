@@ -38,9 +38,9 @@ export const Footer: React.FC = () => {
               <div className="w-14 h-14 rounded-full border border-[#9BD0C0] bg-white text-[#254653] group-hover:bg-[#1C4E57] group-hover:border-[#1C4E57] group-hover:text-white group-hover:scale-115 group-hover:rotate-6 group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-3">
                 <ShieldCheck className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h4 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
+              <h2 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
                 Premium Quality
-              </h4>
+              </h2>
               <p className="text-xs text-[#5C7C85] group-hover:text-[#254653] mt-1 transition-colors">
                 Certified skin-friendly organic weaves
               </p>
@@ -50,9 +50,9 @@ export const Footer: React.FC = () => {
               <div className="w-14 h-14 rounded-full border border-[#9BD0C0] bg-white text-[#254653] group-hover:bg-[#1C4E57] group-hover:border-[#1C4E57] group-hover:text-white group-hover:scale-115 group-hover:rotate-6 group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-3">
                 <Sparkles className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h4 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
+              <h2 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
                 Trendy Styles
-              </h4>
+              </h2>
               <p className="text-xs text-[#5C7C85] group-hover:text-[#254653] mt-1 transition-colors">
                 Coordinated designs across all ages
               </p>
@@ -62,9 +62,9 @@ export const Footer: React.FC = () => {
               <div className="w-14 h-14 rounded-full border border-[#9BD0C0] bg-white text-[#254653] group-hover:bg-[#1C4E57] group-hover:border-[#1C4E57] group-hover:text-white group-hover:scale-115 group-hover:rotate-6 group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-3">
                 <Tag className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h4 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
+              <h2 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
                 Affordable Prices
-              </h4>
+              </h2>
               <p className="text-xs text-[#5C7C85] group-hover:text-[#254653] mt-1 transition-colors">
                 Direct-to-family everyday value
               </p>
@@ -74,9 +74,9 @@ export const Footer: React.FC = () => {
               <div className="w-14 h-14 rounded-full border border-[#9BD0C0] bg-white text-[#254653] group-hover:bg-[#1C4E57] group-hover:border-[#1C4E57] group-hover:text-white group-hover:scale-115 group-hover:rotate-6 group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-3">
                 <Users className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h4 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
+              <h2 className="font-serif font-bold text-sm sm:text-base text-[#254653] group-hover:text-[#1C4E57] transition-colors">
                 For All Ages
-              </h4>
+              </h2>
               <p className="text-xs text-[#5C7C85] group-hover:text-[#254653] mt-1 transition-colors">
                 Newborns to grandparents together
               </p>
@@ -142,7 +142,7 @@ export const Footer: React.FC = () => {
 
           {/* Shop Column */}
           <div>
-            <h4 className="font-serif font-bold text-base text-[#254653] mb-4">Shop Collections</h4>
+            <h2 className="font-serif font-bold text-base text-[#254653] mb-4">Shop Collections</h2>
             <ul className="space-y-2 text-sm text-[#607985]">
               {CATEGORIES.slice(0, 6).map((cat) => (
                 <li key={cat.id}>
@@ -167,7 +167,7 @@ export const Footer: React.FC = () => {
 
           {/* Company Column */}
           <div>
-            <h4 className="font-serif font-bold text-base text-[#254653] mb-4">About Familia</h4>
+            <h2 className="font-serif font-bold text-base text-[#254653] mb-4">About Familia</h2>
             <ul className="space-y-2 text-sm text-[#607985]">
               <li>
                 <button onClick={() => handleViewClick('about')} className="hover:text-[#477C82] transition-colors">
@@ -199,7 +199,7 @@ export const Footer: React.FC = () => {
 
           {/* Customer Care */}
           <div>
-            <h4 className="font-serif font-bold text-base text-[#254653] mb-4">Customer Care</h4>
+            <h2 className="font-serif font-bold text-base text-[#254653] mb-4">Customer Care</h2>
             <ul className="space-y-2 text-sm text-[#607985]">
               <li>
                 <button onClick={() => handleViewClick('cart')} className="hover:text-[#477C82] transition-colors">

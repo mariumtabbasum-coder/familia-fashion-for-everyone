@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { EcommerceProvider, useEcommerce } from './context/EcommerceContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
@@ -16,32 +16,19 @@ import { WhyFamiliaSection } from './components/home/WhyFamiliaSection';
 import { NewsletterSection } from './components/home/NewsletterSection';
 
 // Dedicated Page Views
-import { ShopPage } from './components/shop/ShopPage';
-import { ProductDetailPage } from './components/product/ProductDetailPage';
-import { CartPage } from './components/cart/CartPage';
-import { WishlistPage } from './components/wishlist/WishlistPage';
-import { AccountPage } from './components/account/AccountPage';
-import { AboutPageView } from './components/views/AboutPageView';
-import { LookbookPageView } from './components/views/LookbookPageView';
-import { BlogPageView } from './components/views/BlogPageView';
-import { ContactPageView } from './components/views/ContactPageView';
-
-import gsap from 'gsap';
+const ShopPage = lazy(() => import('./components/shop/ShopPage').then((module) => ({ default: module.ShopPage })));
+const ProductDetailPage = lazy(() => import('./components/product/ProductDetailPage').then((module) => ({ default: module.ProductDetailPage })));
+const CartPage = lazy(() => import('./components/cart/CartPage').then((module) => ({ default: module.CartPage })));
+const WishlistPage = lazy(() => import('./components/wishlist/WishlistPage').then((module) => ({ default: module.WishlistPage })));
+const AccountPage = lazy(() => import('./components/account/AccountPage').then((module) => ({ default: module.AccountPage })));
+const AboutPageView = lazy(() => import('./components/views/AboutPageView').then((module) => ({ default: module.AboutPageView })));
+const LookbookPageView = lazy(() => import('./components/views/LookbookPageView').then((module) => ({ default: module.LookbookPageView })));
+const BlogPageView = lazy(() => import('./components/views/BlogPageView').then((module) => ({ default: module.BlogPageView })));
+const ContactPageView = lazy(() => import('./components/views/ContactPageView').then((module) => ({ default: module.ContactPageView })));
 
 const AppContent: React.FC = () => {
   const { activeView } = useEcommerce();
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  // Smooth view transition
   useEffect(() => {
-    if (mainRef.current) {
-      gsap.fromTo(
-        mainRef.current,
-        { opacity: 0.94, y: 4 },
-        { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
-      );
-    }
-    // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView]);
 
@@ -51,7 +38,8 @@ const AppContent: React.FC = () => {
       <Header />
 
       {/* Main Content Area */}
-      <main ref={mainRef} className="flex-1 w-full max-w-full overflow-x-hidden">
+      <main key={activeView} className="route-content flex-1 w-full max-w-full overflow-x-hidden">
+        <Suspense fallback={null}>
         {/* Homepage: Hero flagship + curated categories + family matching lookbook + trust pillars + newsletter */}
         {activeView === 'home' && (
           <>
@@ -89,6 +77,7 @@ const AppContent: React.FC = () => {
 
         {/* Account / Sign In */}
         {activeView === 'account' && <AccountPage />}
+        </Suspense>
       </main>
 
       {/* Global Footer */}

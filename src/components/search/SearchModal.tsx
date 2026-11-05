@@ -63,6 +63,7 @@ export const SearchModal: React.FC = () => {
           <Search className="w-6 h-6 text-[#477C82] flex-shrink-0" />
           <input
             ref={inputRef}
+            aria-label="Search products"
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
