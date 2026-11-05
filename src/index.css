@@ -89,9 +89,11 @@ body {
 }
 
 /* Keep small utility text readable against the light storefront surfaces. */
-[class~="text-[#FF8F86]"] { color: #C24138; }
-[class~="text-[#5C7C85]"] { color: #56747D; }
-[class~="text-gray-400"] { color: #6B7280; }
+[class~="text-[#FF8F86]"] { color: #A9322A; }
+[class~="text-[#477C82]"],
+[class~="text-[#607985]"],
+[class~="text-[#5C7C85]"] { color: #315960; }
+[class~="text-gray-400"] { color: #4B5563; }
 [class~="bg-[#FF8F86]"][class~="text-white"] { color: #254653; }
 
 @media (min-width: 768px) {
