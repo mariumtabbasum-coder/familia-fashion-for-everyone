@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEcommerce } from '../../context/EcommerceContext';
 import { CategoryId } from '../../types';
 import { ChevronRight, Sparkles } from 'lucide-react';
+import { getResponsiveAsset } from '../../utils/responsiveAssets';
 
 interface CategoryShortcutItem {
   id: CategoryId;
@@ -106,6 +107,7 @@ export const HeroSection: React.FC = () => {
   ];
 
   const slide = heroSlides[currentSlide % heroSlides.length];
+  const heroImage = getResponsiveAsset(slide.image);
 
   const handleNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -221,7 +223,13 @@ export const HeroSection: React.FC = () => {
               <div className="lg:col-span-5 relative min-h-[320px] sm:min-h-[380px] lg:min-h-[450px] flex items-center justify-end overflow-hidden group/heroimg">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img
-                    src={slide.image}
+                    src={heroImage.src}
+                    srcSet={heroImage.srcSet}
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    width={1376}
+                    height={768}
+                    width={1376}
+                    height={768}
                     alt={slide.alt}
                     className="w-full h-full object-cover object-[center_20%] lg:object-[center_24%] transition-transform duration-700 ease-out group-hover/heroimg:scale-104"
                     loading="eager"

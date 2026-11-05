@@ -4,9 +4,6 @@ import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { MobileDrawer } from './components/layout/MobileDrawer';
 import { ToastContainer } from './components/ui/ToastContainer';
-import { SearchModal } from './components/search/SearchModal';
-import { CheckoutModal } from './components/checkout/CheckoutModal';
-import { QuickViewModal } from './components/product/QuickViewModal';
 
 // Clean Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
@@ -25,9 +22,12 @@ const AboutPageView = lazy(() => import('./components/views/AboutPageView').then
 const LookbookPageView = lazy(() => import('./components/views/LookbookPageView').then((module) => ({ default: module.LookbookPageView })));
 const BlogPageView = lazy(() => import('./components/views/BlogPageView').then((module) => ({ default: module.BlogPageView })));
 const ContactPageView = lazy(() => import('./components/views/ContactPageView').then((module) => ({ default: module.ContactPageView })));
+const SearchModal = lazy(() => import('./components/search/SearchModal').then((module) => ({ default: module.SearchModal })));
+const CheckoutModal = lazy(() => import('./components/checkout/CheckoutModal').then((module) => ({ default: module.CheckoutModal })));
+const QuickViewModal = lazy(() => import('./components/product/QuickViewModal').then((module) => ({ default: module.QuickViewModal })));
 
 const AppContent: React.FC = () => {
-  const { activeView } = useEcommerce();
+  const { activeView, isSearchOpen, isCheckoutOpen, quickViewProduct } = useEcommerce();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView]);
@@ -39,7 +39,7 @@ const AppContent: React.FC = () => {
 
       {/* Main Content Area */}
       <main key={activeView} className="route-content flex-1 w-full max-w-full overflow-x-hidden">
-        <Suspense fallback={null}>
+        <Suspense fallback={<div aria-hidden="true" className="min-h-[70svh] w-full bg-[#F8FBFA]" />}>
         {/* Homepage: Hero flagship + curated categories + family matching lookbook + trust pillars + newsletter */}
         {activeView === 'home' && (
           <>
@@ -85,9 +85,11 @@ const AppContent: React.FC = () => {
 
       {/* Modals & Drawers */}
       <MobileDrawer />
-      <SearchModal />
-      <CheckoutModal />
-      <QuickViewModal />
+      <Suspense fallback={null}>
+        {isSearchOpen && <SearchModal />}
+        {isCheckoutOpen && <CheckoutModal />}
+        {quickViewProduct && <QuickViewModal />}
+      </Suspense>
       <ToastContainer />
     </div>
   );

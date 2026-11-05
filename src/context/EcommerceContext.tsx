@@ -81,6 +81,28 @@ interface EcommerceContextType {
 
 const EcommerceContext = createContext<EcommerceContextType | undefined>(undefined);
 
+const getInitialRoute = () => {
+  if (typeof window === 'undefined') return '/';
+  const path = window.location.hash.startsWith('#/')
+    ? window.location.hash.slice(1).split('?')[0]
+    : window.location.pathname.split('?')[0];
+  return path || '/';
+};
+
+const getInitialView = (path: string): ActiveViewType => {
+  if (path === '/' || path === '') return 'home';
+  if (path === '/about') return 'about';
+  if (path === '/lookbook') return 'lookbook';
+  if (path === '/cart') return 'cart';
+  if (path === '/wishlist') return 'wishlist';
+  if (path === '/account') return 'account';
+  if (path === '/contact') return 'contact';
+  if (path === '/blog' || path.startsWith('/blog/')) return 'blog';
+  if (path.startsWith('/product/')) return 'product';
+  if (['/shop', '/women', '/men', '/kids', '/baby', '/kids-baby', '/teens', '/sale'].includes(path)) return 'shop';
+  return 'home';
+};
+
 // Initial items to seed matching Screen 9 in reference
 const getInitialCart = (): CartItem[] => {
   const floral = PRODUCTS.find((p) => p.id === 'floral-maxi-dress');
@@ -125,6 +147,7 @@ const getInitialWishlist = (): Product[] => {
 };
 
 export const EcommerceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [initialPath] = useState(getInitialRoute);
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('familia_cart_v1');
@@ -146,17 +169,25 @@ export const EcommerceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
-  const [activeView, setActiveView] = useState<ActiveViewType>('home');
-  const [selectedCategory, setSelectedCategory] = useState<CategoryId | 'all'>('all');
+  const [activeView, setActiveView] = useState<ActiveViewType>(() => getInitialView(initialPath));
+  const initialCategory: CategoryId | 'all' = initialPath === '/women' ? 'women'
+    : initialPath === '/men' ? 'men'
+      : ['/kids', '/baby', '/kids-baby'].includes(initialPath) ? 'kids-baby'
+        : initialPath === '/teens' ? 'teens'
+          : initialPath === '/sale' ? 'sale' : 'all';
+  const [selectedCategory, setSelectedCategory] = useState<CategoryId | 'all'>(initialCategory);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
-  const [selectedProductId, setSelectedProductId] = useState<string | null>('floral-maxi-dress');
-  const [selectedBlogSlug, setSelectedBlogSlug] = useState<string | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(() => {
+    const productSlug = initialPath.startsWith('/product/') ? initialPath.slice('/product/'.length) : '';
+    return PRODUCTS.find((product) => product.slug === productSlug || product.id === productSlug)?.id ?? 'floral-maxi-dress';
+  });
+  const [selectedBlogSlug, setSelectedBlogSlug] = useState<string | null>(initialPath.startsWith('/blog/') ? initialPath.slice('/blog/'.length) : null);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [megaMenuCategory, setMegaMenuCategory] = useState<CategoryId | null>(null);
-  const [currentPath, setCurrentPath] = useState('/');
+  const [currentPath, setCurrentPath] = useState(initialPath);
 
   // Parse path and sync internal state
   const parsePath = useCallback((pathname: string) => {

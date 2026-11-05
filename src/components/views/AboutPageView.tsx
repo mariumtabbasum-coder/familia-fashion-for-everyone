@@ -1,4 +1,5 @@
 import React from 'react';
+import { getResponsiveAsset } from '../../utils/responsiveAssets';
 import { useEcommerce } from '../../context/EcommerceContext';
 import {
   Heart,
@@ -139,10 +140,16 @@ export const AboutPageView: React.FC = () => {
             <div className="lg:col-span-5 relative min-h-[320px] sm:min-h-[380px] lg:min-h-[450px] flex items-center justify-end overflow-hidden group/heroimg">
               <div className="relative w-full h-full flex items-center justify-center">
                 <img
-                  src="/assets/about_family_crisp.jpg"
+                  src={getResponsiveAsset('/assets/about_family_crisp.jpg').src}
+                  srcSet={getResponsiveAsset('/assets/about_family_crisp.jpg').srcSet}
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  width={1200}
+                  height={896}
                   alt="Crystal clear portrait of smiling happy family wearing coordinated FAMILIA apparel outdoors"
                   className="w-full h-full object-cover object-[center_20%] lg:object-[center_24%] transition-transform duration-700 ease-out group-hover/heroimg:scale-104"
                   loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
                 {/* Seamless blend gradient on the left edge into the pale mint background matching home & collection headers */}
                 <div className="absolute inset-y-0 left-0 w-20 sm:w-28 lg:w-36 bg-gradient-to-r from-[#E2F4F2] via-[#E2F4F2]/60 to-transparent pointer-events-none hidden lg:block" />
