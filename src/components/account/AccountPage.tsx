@@ -187,6 +187,7 @@ export const AccountPage: React.FC = () => {
                     {currentUser.name}
                   </h2>
                   <p className="text-xs text-[#607985]">{currentUser.email}</p>
+                  <p className="text-[10px] text-[#477C82] mt-1">Demo profile saved on this device</p>
                 </div>
               </div>
               <button
@@ -226,7 +227,7 @@ export const AccountPage: React.FC = () => {
               <div className="space-y-4">
                 <h3 className="font-serif text-lg font-bold text-[#254653] flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#477C82]" />
-                  Saved Address
+                  Saved Address (Demo)
                 </h3>
                 <div className="border border-[#D9E8EC] rounded-2xl p-4 text-xs text-[#607985] bg-[#F8FBFA] space-y-1">
                   <p className="font-bold text-[#254653]">{currentUser.name}</p>
@@ -253,7 +254,7 @@ export const AccountPage: React.FC = () => {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D9E8EC] shadow-xs flex flex-col justify-between">
               <div>
                 <h2 className="font-serif text-2xl font-bold text-[#254653]">Sign In</h2>
-                <p className="text-xs text-[#607985] mt-1 mb-6">Welcome back to your family account!</p>
+                <p className="text-xs text-[#607985] mt-1 mb-6">Demo account: sign-in is saved in this browser and does not connect to a real store account.</p>
 
                 <form onSubmit={handleSignIn} className="space-y-4" noValidate>
                   {/* Email */}
@@ -401,6 +402,7 @@ export const AccountPage: React.FC = () => {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D9E8EC] shadow-xs flex flex-col justify-between">
               <div>
                 <h2 className="font-serif text-2xl font-bold text-[#254653]">Create Account</h2>
+                <p className="text-xs text-[#607985] mt-1 mb-6">Create a demo profile stored locally on this device.</p>
                 <p className="text-xs text-[#607985] mt-1 mb-6">Join our family!</p>
 
                 <form onSubmit={handleSignUp} className="space-y-4" noValidate>
@@ -421,7 +423,7 @@ export const AccountPage: React.FC = () => {
                       type="text"
                       value={signUpName}
                       onChange={(e) => {
-                        const val = e.target.value;
+                        const val = e.target.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 50);
                         setSignUpName(val);
                         setSignUpTouched((prev) => ({ ...prev, name: true }));
                         const err = validateSignUpField('name', val);

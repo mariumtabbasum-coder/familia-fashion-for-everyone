@@ -326,12 +326,6 @@ export const ShopPage: React.FC = () => {
                     <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
 
-                  <button
-                    onClick={() => navigateTo('/lookbook')}
-                    className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/80 hover:bg-white text-[#254653] hover:text-[#1C4E57] font-semibold text-xs sm:text-sm tracking-wide border border-[#6B9CA6]/60 hover:border-[#477C82] transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                  >
-                    Explore Collection
-                  </button>
                 </div>
               </div>
 

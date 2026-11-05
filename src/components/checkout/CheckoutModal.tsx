@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEcommerce } from '../../context/EcommerceContext';
 import {
   X,
@@ -18,7 +18,7 @@ const REGEX_EMAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const REGEX_ADDRESS = /^[a-zA-Z0-9\s,.'#-]{5,100}$/;
 const REGEX_CITY = /^[a-zA-Z\s.-]{2,50}$/;
 const REGEX_POSTAL = /^[A-Za-z0-9\s-]{3,10}$/;
-const REGEX_PHONE = /^(\+?[0-9]{1,4}[\s-]?)?(\(?[0-9]{2,5}\)?[\s-]?)?[0-9]{3,4}[\s-]?[0-9]{3,4}$/;
+const REGEX_PHONE = /^[+\d\s()-]+$/;
 const REGEX_CARD_NUM = /^(\d{4}[\s-]?){3}\d{4}$/;
 const REGEX_CARD_EXP = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
 const REGEX_CARD_CVV = /^[0-9]{3,4}$/;
@@ -37,25 +37,37 @@ export const CheckoutModal: React.FC = () => {
   const [step, setStep] = useState<'shipping' | 'payment' | 'confirmed'>('shipping');
 
   // Shipping form state
-  const [fullName, setFullName] = useState('Elena Vance');
-  const [email, setEmail] = useState('elena.vance@example.com');
-  const [phone, setPhone] = useState('+1 (555) 234-5678');
-  const [address, setAddress] = useState('742 Evergreen Terrace');
-  const [city, setCity] = useState('Springfield');
-  const [postalCode, setPostalCode] = useState('97477');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
   const [shippingMethod, setShippingMethod] = useState<'standard' | 'express'>('standard');
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [shippingTouched, setShippingTouched] = useState<Record<string, boolean>>({});
 
   // Payment form state
-  const [cardName, setCardName] = useState('Elena Vance');
-  const [cardNumber, setCardNumber] = useState('4242 4242 4242 4242');
-  const [cardExpiry, setCardExpiry] = useState('12/28');
-  const [cardCvv, setCardCvv] = useState('888');
+  const [cardName, setCardName] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpiry, setCardExpiry] = useState('');
+  const [cardCvv, setCardCvv] = useState('');
   const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
   const [paymentTouched, setPaymentTouched] = useState<Record<string, boolean>>({});
 
   const [confirmedOrderId, setConfirmedOrderId] = useState('');
+
+  const resetCheckout = () => {
+    setStep('shipping');
+    setFullName(''); setEmail(''); setPhone(''); setAddress(''); setCity(''); setPostalCode('');
+    setShippingMethod('standard'); setShippingErrors({}); setShippingTouched({});
+    setCardName(''); setCardNumber(''); setCardExpiry(''); setCardCvv('');
+    setPaymentErrors({}); setPaymentTouched({}); setConfirmedOrderId('');
+  };
+
+  useEffect(() => {
+    if (!isCheckoutOpen) resetCheckout();
+  }, [isCheckoutOpen]);
 
   if (!isCheckoutOpen) return null;
 
@@ -70,7 +82,7 @@ export const CheckoutModal: React.FC = () => {
         if (!REGEX_EMAIL.test(trimmed)) return 'Please provide a valid email address.';
         break;
       case 'phone':
-        if (!REGEX_PHONE.test(trimmed)) return 'Please provide a valid phone number.';
+        if (!REGEX_PHONE.test(trimmed) || trimmed.replace(/\D/g, '').length !== 11) return 'Phone number must contain exactly 11 digits.';
         break;
       case 'address':
         if (!REGEX_ADDRESS.test(trimmed)) return 'Please provide a valid street address (min 5 chars).';
@@ -79,7 +91,7 @@ export const CheckoutModal: React.FC = () => {
         if (!REGEX_CITY.test(trimmed)) return 'City must contain letters and spaces (min 2 chars).';
         break;
       case 'postalCode':
-        if (!REGEX_POSTAL.test(trimmed)) return 'Please provide a valid postal/ZIP code format.';
+        if (trimmed && !REGEX_POSTAL.test(trimmed)) return 'Please provide a valid postal/ZIP code format.';
         break;
     }
     return undefined;
@@ -122,7 +134,7 @@ export const CheckoutModal: React.FC = () => {
     const phoneErr = validateShippingField('phone', phone);
     const addrErr = validateShippingField('address', address);
     const cityErr = validateShippingField('city', city);
-    const postErr = validateShippingField('postalCode', postalCode);
+    const postErr = postalCode.trim() ? validateShippingField('postalCode', postalCode) : undefined;
 
     if (nameErr) errors.fullName = nameErr;
     if (emailErr) errors.email = emailErr;
@@ -231,7 +243,7 @@ export const CheckoutModal: React.FC = () => {
                     type="text"
                     value={fullName}
                     onChange={(e) => {
-                      const v = e.target.value;
+                      const v = e.target.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 60);
                       setFullName(v);
                       setShippingTouched((p) => ({ ...p, fullName: true }));
                       setShippingErrors((p) => ({ ...p, fullName: validateShippingField('fullName', v) || '' }));
@@ -307,12 +319,13 @@ export const CheckoutModal: React.FC = () => {
                       type="tel"
                       value={phone}
                       onChange={(e) => {
-                        const v = e.target.value;
+                        const v = e.target.value.replace(/\D/g, '').slice(0, 11);
                         setPhone(v);
                         setShippingTouched((p) => ({ ...p, phone: true }));
                         setShippingErrors((p) => ({ ...p, phone: validateShippingField('phone', v) || '' }));
                       }}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="11 digit phone number"
+                      maxLength={16}
                       className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all ${
                         shippingTouched.phone && shippingErrors.phone
                           ? 'bg-rose-50/20 border border-rose-400 focus:ring-2 focus:ring-rose-100'
@@ -410,9 +423,9 @@ export const CheckoutModal: React.FC = () => {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <label className="block text-xs font-medium text-[#254653]">
-                        Postal / ZIP <span className="text-[#FF8F86]">*</span>
+                        Postal / ZIP <span className="text-[#607985]">(optional)</span>
                       </label>
-                      {shippingTouched.postalCode && !shippingErrors.postalCode && (
+                      {shippingTouched.postalCode && postalCode.trim() && !shippingErrors.postalCode && (
                         <span className="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
                           <Check className="w-3 h-3" /> Valid
                         </span>
@@ -554,7 +567,7 @@ export const CheckoutModal: React.FC = () => {
                     type="text"
                     value={cardName}
                     onChange={(e) => {
-                      const v = e.target.value;
+                      const v = e.target.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 60);
                       setCardName(v);
                       setPaymentTouched((p) => ({ ...p, cardName: true }));
                       setPaymentErrors((p) => ({ ...p, cardName: validatePaymentField('cardName', v) || '' }));

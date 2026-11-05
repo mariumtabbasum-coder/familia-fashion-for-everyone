@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEcommerce } from '../../context/EcommerceContext';
-import { ArrowRight, Sparkles, Heart, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Heart, CheckCircle2 } from 'lucide-react';
 import familyLookbookImg from '../../assets/images/family_lookbook_fashion_1792841854700.jpg';
 
 export const EditorialPromoBanner: React.FC = () => {
@@ -48,13 +48,6 @@ export const EditorialPromoBanner: React.FC = () => {
 
               {/* CTA Action Buttons with enhanced hover */}
               <div className="pt-2 flex flex-wrap items-center gap-3.5">
-                <button
-                  onClick={() => navigateTo('/lookbook')}
-                  className="px-7 py-3.5 rounded-full bg-[#1C4E57] hover:bg-[#143B42] text-white text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2.5 group/btn cursor-pointer"
-                >
-                  <span>Explore Lookbook</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1.5 transition-transform duration-300" />
-                </button>
                 <button
                   onClick={() => navigateTo('/shop')}
                   className="px-6 py-3.5 rounded-full bg-white/90 hover:bg-white text-[#254653] hover:text-[#1C4E57] text-sm font-semibold border border-[#D9E8EC] hover:border-[#477C82] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"

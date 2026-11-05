@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Product } from '../../types';
 import { useEcommerce } from '../../context/EcommerceContext';
 import { Heart, Star, ShoppingBag, Eye } from 'lucide-react';
@@ -10,6 +10,8 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
   const { isInWishlist, toggleWishlist, addToCart, navigateTo } = useEcommerce();
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'M');
   const isFavorited = isInWishlist(product.id);
 
   const handleCardClick = () => {
@@ -18,9 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const defaultColor = product.colors[0];
-    const defaultSize = product.sizes[0] || 'M';
-    addToCart(product, defaultColor, defaultSize, 1);
+    addToCart(product, product.colors[selectedColorIndex] || product.colors[0], selectedSize, 1);
   };
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -148,9 +148,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
           {/* Available Color Indicators */}
           <div className="flex items-center -space-x-1">
             {product.colors.slice(0, 3).map((col, idx) => (
-              <span
+              <button
                 key={`${col.name}-${idx}`}
-                className="w-3.5 h-3.5 rounded-full border border-white shadow-xs"
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setSelectedColorIndex(idx); }}
+                aria-label={`Select ${col.name}`}
+                aria-pressed={selectedColorIndex === idx}
+                className={`w-3.5 h-3.5 rounded-full border border-white shadow-xs ${selectedColorIndex === idx ? 'ring-1 ring-[#477C82] ring-offset-1' : ''}`}
                 style={{ backgroundColor: col.hex }}
                 title={col.name}
               />
@@ -160,6 +164,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
                 +{product.colors.length - 3}
               </span>
             )}
+          </div>
+        </div>
+        <div className="mt-2 flex items-center justify-between gap-1" onClick={(e) => e.stopPropagation()}>
+          <span className="text-[10px] text-[#607985]">Size</span>
+          <div className="flex gap-1">
+            {product.sizes.slice(0, 5).map((size) => (
+              <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size}
+                className={`min-w-6 px-1.5 py-1 rounded-md border text-[9px] font-semibold ${selectedSize === size ? 'bg-[#477C82] text-white border-[#477C82]' : 'bg-white text-[#254653] border-[#D9E8EC]'}`}>
+                {size}
+              </button>
+            ))}
           </div>
         </div>
       </div>

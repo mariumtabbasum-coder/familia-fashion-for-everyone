@@ -90,7 +90,6 @@ export const HeroSection: React.FC = () => {
       sub1: 'Modern looks for every member of your family.',
       sub2: 'Comfort, quality and style — all in one place.',
       ctaPrimary: 'Shop Now',
-      ctaSecondary: 'Explore Collection',
       image: '/assets/hero_family_clear.jpg',
       alt: 'FAMILIA smiling modern family of four in coordinated sage and cream apparel',
     },
@@ -101,7 +100,6 @@ export const HeroSection: React.FC = () => {
       sub1: 'From everyday organic cotton staples to festive',
       sub2: 'matching milestone collections for the whole family.',
       ctaPrimary: 'Shop Now',
-      ctaSecondary: 'Explore Collection',
       image: '/assets/hero_family_spring.jpg',
       alt: 'FAMILIA family in coordinated warm neutral knitwear and jackets',
     },
@@ -184,13 +182,6 @@ export const HeroSection: React.FC = () => {
                       <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
 
-                    {/* Secondary Button */}
-                    <button
-                      onClick={() => navigateTo('/lookbook')}
-                      className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/80 hover:bg-white text-[#254653] hover:text-[#1C4E57] font-semibold text-xs sm:text-sm tracking-wide border border-[#6B9CA6]/60 hover:border-[#477C82] transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                    >
-                      {slide.ctaSecondary}
-                    </button>
                   </div>
                 </div>
 
