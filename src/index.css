@@ -29,15 +29,6 @@
   }
 }
 
-@keyframes route-content-enter {
-  from { opacity: 0.94; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.route-content {
-  animation: route-content-enter 250ms ease-out both;
-}
-
 /* Custom scrollbar and smooth transitions */
 html {
   scroll-behavior: smooth;
@@ -82,25 +73,22 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Defer painting long product grids until cards approach the viewport. */
-.product-card {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 430px;
-}
-
 /* Keep small utility text readable against the light storefront surfaces. */
 [class~="text-[#FF8F86]"] { color: #A9322A; }
 [class~="text-[#477C82]"],
 [class~="text-[#607985]"],
 [class~="text-[#5C7C85]"] { color: #315960; }
 [class~="text-gray-400"] { color: #4B5563; }
+[class~="text-[#E86759]"],
+[class~="text-[#E05244]"],
+[class~="text-[#e05244]"],
+[class~="text-[#d94f44]"] { color: #A9322A; }
+[class~="text-[#5DAEA7]"],
+[class~="text-[#9BD0C0]"],
+[class~="text-[#A3B8BE]"],
+[class~="text-[#6A858D]"],
+[class~="text-[#56747D]"] { color: #315960; }
 [class~="bg-[#FF8F86]"][class~="text-white"] { color: #254653; }
-
-@media (min-width: 768px) {
-  .product-card {
-    contain-intrinsic-size: auto 560px;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

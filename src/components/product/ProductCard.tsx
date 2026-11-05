@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Product } from '../../types';
 import { useEcommerce } from '../../context/EcommerceContext';
 import { Heart, Star, ShoppingBag, Eye } from 'lucide-react';
@@ -12,8 +12,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
   const { isInWishlist, toggleWishlist, addToCart, navigateTo } = useEcommerce();
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'M');
+  const [loadImages, setLoadImages] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const selectedColor = product.colors[selectedColorIndex] || product.colors[0];
   const isFavorited = isInWishlist(product.id);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    if (!('IntersectionObserver' in window)) {
+      setLoadImages(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setLoadImages(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '250px 0px' });
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
 
   const handleCardClick = () => {
     navigateTo(`/product/${product.slug}`);
@@ -33,6 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
 
   return (
     <div
+      ref={cardRef}
       onClick={handleCardClick}
       className="product-card group min-w-0 bg-white rounded-2xl border border-[#D9E8EC] overflow-hidden hover:border-[#477C82]/30 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer"
     >
@@ -40,8 +61,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
       <div className="relative aspect-[3/4] bg-[#F0F7F8] overflow-hidden">
         {/* Primary Image */}
         <img
-          src={selectedColor?.image || product.images[0]}
-          alt={product.name}
+          src={loadImages ? (selectedColor?.image || product.images[0]) : undefined}
+          alt={loadImages ? product.name : ''}
+          aria-hidden={!loadImages}
           referrerPolicy="no-referrer"
           className={`w-full h-full object-contain object-center transition-transform duration-700 ease-out ${
             hasSecondaryImage ? 'group-hover:scale-105' : 'group-hover:scale-105'
@@ -52,7 +74,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
         />
 
         {/* Secondary Image Reveal on Hover */}
-        {hasSecondaryImage && !selectedColor?.image && (
+        {loadImages && hasSecondaryImage && !selectedColor?.image && (
           <img
             src={product.images[1]}
             alt={`${product.name} alternate view`}
