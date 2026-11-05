@@ -121,6 +121,10 @@ export const AccountPage: React.FC = () => {
       setCurrentUser(user);
       localStorage.setItem('familia_demo_user', JSON.stringify(user));
       showToast(`Welcome back, ${user.name}!`, 'success');
+      setSignInEmail('');
+      setSignInPassword('');
+      setSignInErrors({});
+      setSignInTouched({});
     }
   };
 
@@ -147,6 +151,11 @@ export const AccountPage: React.FC = () => {
       setCurrentUser(user);
       localStorage.setItem('familia_demo_user', JSON.stringify(user));
       showToast(`Account created! Welcome to Familia, ${user.name}!`, 'success');
+      setSignUpName('');
+      setSignUpEmail('');
+      setSignUpPassword('');
+      setSignUpErrors({});
+      setSignUpTouched({});
     }
   };
 

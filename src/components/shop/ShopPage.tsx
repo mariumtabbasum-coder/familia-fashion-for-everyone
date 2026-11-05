@@ -7,7 +7,6 @@ import familyLookbookImg from '../../assets/images/family_lookbook_fashion_17928
 import {
   SlidersHorizontal,
   ChevronDown,
-  Sparkles,
   Tag,
   ArrowRight,
   CheckCircle2,
@@ -259,8 +258,7 @@ export const ShopPage: React.FC = () => {
               </span>
             </>
           )}
-          <span className="ml-auto hidden md:inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#477C82] bg-[#EAF4F9] px-2.5 py-0.5 rounded-full border border-[#D9E8EC]">
-            <Sparkles className="w-3 h-3 text-[#477C82]" />
+          <span className="ml-auto hidden md:inline-flex items-center text-[11px] font-semibold text-[#477C82]">
             {filteredProducts.length} Styles Available
           </span>
         </nav>
@@ -329,16 +327,9 @@ export const ShopPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bottom-Left Sparkle Indicators & Item Count */}
-              <div className="mt-6 sm:mt-8 pt-2 flex items-center gap-2.5">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center bg-white text-[#1C4E57] shadow-sm ring-1 ring-[#D6EBF0]">
-                  <Sparkles className="w-3.5 h-3.5" />
-                </div>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#1C4E57]/40 shadow-2xs" />
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center bg-white/60 text-[#34606A]/70">
-                  <Sparkles className="w-3.5 h-3.5" />
-                </div>
-                <span className="ml-2 text-xs font-medium text-[#477C82]">
+              {/* Product count */}
+              <div className="mt-6 sm:mt-8 pt-2">
+                <span className="text-xs font-medium text-[#477C82]">
                   {filteredProducts.length} Styles Available
                 </span>
               </div>

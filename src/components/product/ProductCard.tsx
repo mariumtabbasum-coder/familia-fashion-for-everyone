@@ -12,6 +12,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
   const { isInWishlist, toggleWishlist, addToCart, navigateTo } = useEcommerce();
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'M');
+  const selectedColor = product.colors[selectedColorIndex] || product.colors[0];
   const isFavorited = isInWishlist(product.id);
 
   const handleCardClick = () => {
@@ -39,7 +40,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
       <div className="relative aspect-[3/4] bg-[#F0F7F8] overflow-hidden">
         {/* Primary Image */}
         <img
-          src={product.images[0]}
+          src={selectedColor?.image || product.images[0]}
           alt={product.name}
           referrerPolicy="no-referrer"
           className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out ${
@@ -49,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
         />
 
         {/* Secondary Image Reveal on Hover */}
-        {hasSecondaryImage && (
+        {hasSecondaryImage && !selectedColor?.image && (
           <img
             src={product.images[1]}
             alt={`${product.name} alternate view`}
@@ -134,19 +135,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
 
         {/* Pricing & Colors */}
         <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-[#D9E8EC]/60 flex items-center justify-between">
-          <div className="flex items-baseline gap-1 sm:gap-1.5">
-            <span className="text-sm sm:text-base font-bold text-[#254653] tabular-nums">
-              ${product.price.toFixed(2)}
-            </span>
-            {product.originalPrice && (
-              <span className="text-xs text-gray-400 line-through tabular-nums">
-                ${product.originalPrice.toFixed(2)}
+          <div className="min-w-0">
+            <div className="flex items-baseline gap-1 sm:gap-1.5">
+              <span className="text-sm sm:text-base font-bold text-[#254653] tabular-nums">
+                ${product.price.toFixed(2)}
               </span>
-            )}
+              {product.originalPrice && (
+                <span className="text-xs text-gray-400 line-through tabular-nums">
+                  ${product.originalPrice.toFixed(2)}
+                </span>
+              )}
+            </div>
+            <span className="block max-w-28 truncate text-[9px] text-[#607985]" title={product.colors[selectedColorIndex]?.name}>
+              {product.colors[selectedColorIndex]?.name}
+            </span>
           </div>
 
           {/* Available Color Indicators */}
-          <div className="flex items-center -space-x-1">
+          <div className="flex items-center gap-1.5">
             {product.colors.slice(0, 3).map((col, idx) => (
               <button
                 key={`${col.name}-${idx}`}
@@ -154,7 +160,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
                 onClick={(e) => { e.stopPropagation(); setSelectedColorIndex(idx); }}
                 aria-label={`Select ${col.name}`}
                 aria-pressed={selectedColorIndex === idx}
-                className={`w-3.5 h-3.5 rounded-full border border-white shadow-xs ${selectedColorIndex === idx ? 'ring-1 ring-[#477C82] ring-offset-1' : ''}`}
+                className={`w-4 h-4 rounded-full border border-white shadow-xs cursor-pointer ${selectedColorIndex === idx ? 'ring-2 ring-[#477C82] ring-offset-1' : ''}`}
                 style={{ backgroundColor: col.hex }}
                 title={col.name}
               />

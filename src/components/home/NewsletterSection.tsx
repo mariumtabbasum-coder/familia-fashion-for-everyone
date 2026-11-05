@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEcommerce } from '../../context/EcommerceContext';
 import { Truck, ShieldCheck, RotateCcw, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
@@ -7,6 +7,15 @@ export const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!isSuccess) return;
+    const resetTimer = window.setTimeout(() => {
+      setIsSuccess(false);
+      setEmail('');
+    }, 2500);
+    return () => window.clearTimeout(resetTimer);
+  }, [isSuccess]);
 
   const validateEmail = (val: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
