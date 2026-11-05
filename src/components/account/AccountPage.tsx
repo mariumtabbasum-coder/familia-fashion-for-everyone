@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEcommerce } from '../../context/EcommerceContext';
 import { FamiliaLogo } from '../ui/FamiliaLogo';
 import {
@@ -6,10 +6,7 @@ import {
   EyeOff,
   CheckCircle2,
   AlertCircle,
-  Package,
-  MapPin,
   LogOut,
-  User,
   Check,
 } from 'lucide-react';
 
@@ -20,7 +17,7 @@ const REGEX_PASSWORD_SIGNUP = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&_\-.]{8,}
 const REGEX_PASSWORD_SIGNIN = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&_\-.]{6,}$/;
 
 export const AccountPage: React.FC = () => {
-  const { showToast, navigateTo } = useEcommerce();
+  const { showToast } = useEcommerce();
 
   // User session state
   const [currentUser, setCurrentUser] = useState<{
@@ -28,12 +25,19 @@ export const AccountPage: React.FC = () => {
     email: string;
   } | null>(() => {
     try {
-      const saved = localStorage.getItem('familia_demo_user');
+      const saved = localStorage.getItem('familia_user_v1');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
     }
   });
+  const [accountMessage, setAccountMessage] = useState('');
+
+  useEffect(() => {
+    if (!accountMessage) return;
+    const timer = window.setTimeout(() => setAccountMessage(''), 2500);
+    return () => window.clearTimeout(timer);
+  }, [accountMessage]);
 
   // Sign In form state
   const [signInEmail, setSignInEmail] = useState('');
@@ -119,8 +123,9 @@ export const AccountPage: React.FC = () => {
         email: signInEmail.trim(),
       };
       setCurrentUser(user);
-      localStorage.setItem('familia_demo_user', JSON.stringify(user));
+      localStorage.setItem('familia_user_v1', JSON.stringify(user));
       showToast(`Welcome back, ${user.name}!`, 'success');
+      setAccountMessage('You have signed in successfully.');
       setSignInEmail('');
       setSignInPassword('');
       setSignInErrors({});
@@ -149,8 +154,9 @@ export const AccountPage: React.FC = () => {
         email: signUpEmail.trim(),
       };
       setCurrentUser(user);
-      localStorage.setItem('familia_demo_user', JSON.stringify(user));
+      localStorage.setItem('familia_user_v1', JSON.stringify(user));
       showToast(`Account created! Welcome to Familia, ${user.name}!`, 'success');
+      setAccountMessage('Your account has been created successfully.');
       setSignUpName('');
       setSignUpEmail('');
       setSignUpPassword('');
@@ -161,7 +167,8 @@ export const AccountPage: React.FC = () => {
 
   const handleLogout = () => {
     setCurrentUser(null);
-    localStorage.removeItem('familia_demo_user');
+    setAccountMessage('');
+    localStorage.removeItem('familia_user_v1');
     showToast('Signed out of session.', 'info');
   };
 
@@ -185,8 +192,14 @@ export const AccountPage: React.FC = () => {
 
         {/* Logged In Dashboard View */}
         {currentUser ? (
-          <div className="bg-white rounded-3xl border border-[#D9E8EC] p-6 sm:p-10 shadow-xs space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#D9E8EC] gap-4">
+          <div className="bg-white rounded-3xl border border-[#D9E8EC] p-6 sm:p-10 shadow-xs max-w-3xl mx-auto">
+            {accountMessage && (
+              <div role="status" className="mb-6 flex items-center justify-center gap-2 rounded-2xl border border-[#B8DED0] bg-[#B8DED0]/25 px-4 py-4 text-sm font-semibold text-[#254653]">
+                <CheckCircle2 className="h-5 w-5 text-[#477C82]" />
+                {accountMessage}
+              </div>
+            )}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-[#B8DED0]/50 border border-[#477C82] flex items-center justify-center text-[#477C82] font-serif font-bold text-xl uppercase">
                   {currentUser.name.charAt(0)}
@@ -196,7 +209,6 @@ export const AccountPage: React.FC = () => {
                     {currentUser.name}
                   </h2>
                   <p className="text-xs text-[#607985]">{currentUser.email}</p>
-                  <p className="text-[10px] text-[#477C82] mt-1">Demo profile saved on this device</p>
                 </div>
               </div>
               <button
@@ -208,53 +220,6 @@ export const AccountPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Dashboard Tabs & Demo Orders */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-2 space-y-4">
-                <h3 className="font-serif text-lg font-bold text-[#254653] flex items-center gap-2">
-                  <Package className="w-5 h-5 text-[#477C82]" />
-                  Order History (Demo)
-                </h3>
-                <div className="border border-[#D9E8EC] rounded-2xl divide-y divide-[#D9E8EC] overflow-hidden text-xs">
-                  <div className="p-4 bg-[#F8FBFA] flex justify-between items-center">
-                    <div>
-                      <span className="font-bold text-[#254653]">Order #FAM-2026-8841</span>
-                      <p className="text-[#607985] text-[11px]">Placed on Oct 20, 2026</p>
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-[10px]">
-                      Delivered
-                    </span>
-                  </div>
-                  <div className="p-4 flex justify-between items-center bg-white">
-                    <span className="text-[#607985]">2 items: Floral Maxi Dress, Men&apos;s Casual Shirt</span>
-                    <span className="font-bold text-[#254653]">$89.98</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Saved Address */}
-              <div className="space-y-4">
-                <h3 className="font-serif text-lg font-bold text-[#254653] flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-[#477C82]" />
-                  Saved Address (Demo)
-                </h3>
-                <div className="border border-[#D9E8EC] rounded-2xl p-4 text-xs text-[#607985] bg-[#F8FBFA] space-y-1">
-                  <p className="font-bold text-[#254653]">{currentUser.name}</p>
-                  <p>742 Evergreen Terrace</p>
-                  <p>Springfield, OR 97477</p>
-                  <p>United States</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 flex justify-end">
-              <button
-                onClick={() => navigateTo('/shop')}
-                className="px-6 py-2.5 rounded-full bg-[#477C82] text-white text-xs font-semibold hover:bg-[#39656a] cursor-pointer"
-              >
-                Browse Collections
-              </button>
-            </div>
           </div>
         ) : (
           /* Two-Column Sign In & Create Account matching Screen 12 */
@@ -263,7 +228,7 @@ export const AccountPage: React.FC = () => {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D9E8EC] shadow-xs flex flex-col justify-between">
               <div>
                 <h2 className="font-serif text-2xl font-bold text-[#254653]">Sign In</h2>
-                <p className="text-xs text-[#607985] mt-1 mb-6">Demo account: sign-in is saved in this browser and does not connect to a real store account.</p>
+                <p className="text-xs text-[#607985] mt-1 mb-6">Welcome back to your Familia account.</p>
 
                 <form onSubmit={handleSignIn} className="space-y-4" noValidate>
                   {/* Email */}
@@ -411,7 +376,7 @@ export const AccountPage: React.FC = () => {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D9E8EC] shadow-xs flex flex-col justify-between">
               <div>
                 <h2 className="font-serif text-2xl font-bold text-[#254653]">Create Account</h2>
-                <p className="text-xs text-[#607985] mt-1 mb-6">Create a demo profile stored locally on this device.</p>
+                <p className="text-xs text-[#607985] mt-1 mb-6">Join our family.</p>
                 <p className="text-xs text-[#607985] mt-1 mb-6">Join our family!</p>
 
                 <form onSubmit={handleSignUp} className="space-y-4" noValidate>

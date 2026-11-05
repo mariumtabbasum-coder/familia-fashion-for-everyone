@@ -239,24 +239,35 @@ export const EcommerceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Initialize router from window.location
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      parsePath(window.location.pathname);
+      const initialPath = window.location.hash.startsWith('#/')
+        ? window.location.hash.slice(1)
+        : window.location.pathname;
+      parsePath(initialPath);
 
       const handlePopState = () => {
-        parsePath(window.location.pathname);
+        const route = window.location.hash.startsWith('#/')
+          ? window.location.hash.slice(1)
+          : window.location.pathname;
+        parsePath(route);
       };
 
       window.addEventListener('popstate', handlePopState);
-      return () => window.removeEventListener('popstate', handlePopState);
+      window.addEventListener('hashchange', handlePopState);
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        window.removeEventListener('hashchange', handlePopState);
+      };
     }
   }, [parsePath]);
 
   // Navigate to path and update history
   const navigateTo = (path: string) => {
     if (typeof window !== 'undefined') {
-      if (window.location.pathname !== path) {
-        window.history.pushState(null, '', path);
+      const targetPath = path.startsWith('/') ? path : `/${path}`;
+      if (window.location.hash !== `#${targetPath}`) {
+        window.history.pushState(null, '', `/#${targetPath}`);
       }
-      parsePath(path);
+      parsePath(targetPath);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -265,8 +276,8 @@ export const EcommerceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     if (activeView === 'home' && currentPath !== '/') {
       setCurrentPath('/');
-      if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-        window.history.pushState(null, '', '/');
+      if (typeof window !== 'undefined' && window.location.hash !== '#/') {
+        window.history.pushState(null, '', '/#/');
       }
     }
   }, [activeView, currentPath]);

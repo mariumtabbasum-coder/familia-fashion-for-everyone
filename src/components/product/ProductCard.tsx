@@ -134,7 +134,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
         </div>
 
         {/* Pricing & Colors */}
-        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-[#D9E8EC]/60 flex items-center justify-between">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-[#D9E8EC]/60 flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
             <div className="flex items-baseline gap-1 sm:gap-1.5">
               <span className="text-sm sm:text-base font-bold text-[#254653] tabular-nums">
@@ -152,7 +152,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
           </div>
 
           {/* Available Color Indicators */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex w-full items-center justify-between sm:w-auto sm:justify-end gap-1.5">
+            <span className="text-[9px] text-[#607985] sm:hidden">Color</span>
             {product.colors.slice(0, 3).map((col, idx) => (
               <button
                 key={`${col.name}-${idx}`}
@@ -172,9 +173,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
             )}
           </div>
         </div>
-        <div className="mt-2 flex items-center justify-between gap-1" onClick={(e) => e.stopPropagation()}>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-1" onClick={(e) => e.stopPropagation()}>
           <span className="text-[10px] text-[#607985]">Size</span>
-          <div className="flex gap-1">
+          <div className="flex flex-1 justify-end gap-1">
             {product.sizes.slice(0, 5).map((size) => (
               <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size}
                 className={`min-w-6 px-1.5 py-1 rounded-md border text-[9px] font-semibold ${selectedSize === size ? 'bg-[#477C82] text-white border-[#477C82]' : 'bg-white text-[#254653] border-[#D9E8EC]'}`}>
