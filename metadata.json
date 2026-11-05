@@ -1,0 +1,7 @@
+{
+  "name": "FAMILIA - Fashion for Everyone",
+  "description": "Premium family fashion ecommerce website with curated collections for Women, Men, Kids, Baby, and Teens.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

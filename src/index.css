@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --color-ice-blue: #CFE6F3;
+  --color-mint: #B8DED0;
+  --color-pale-grey: #D9E2E2;
+  --color-coral: #FF8F86;
+  --color-deep-teal: #477C82;
+  --color-teal-dark: #254653;
+  --color-teal-muted: #607985;
+  --color-border-subtle: #D9E8EC;
+  --color-surface-subtle: #F0F7F8;
+  --color-surface-light: #F8FBFA;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-teal-dark);
+    background-color: var(--color-surface-light);
+  }
+  
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom scrollbar and smooth transitions */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Hide scrollbars on horizontally scrollable chip bars */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Visible elegant slim horizontal scrollbar for filter chip bars so users clearly know it scrolls */
+.scrollbar-visible::-webkit-scrollbar {
+  height: 5px;
+}
+.scrollbar-visible::-webkit-scrollbar-track {
+  background: #EAF3F5;
+  border-radius: 9999px;
+}
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  background: #477C82;
+  border-radius: 9999px;
+}
+.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background: #1C4E57;
+}
+.scrollbar-visible {
+  scrollbar-width: thin;
+  scrollbar-color: #477C82 #EAF3F5;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

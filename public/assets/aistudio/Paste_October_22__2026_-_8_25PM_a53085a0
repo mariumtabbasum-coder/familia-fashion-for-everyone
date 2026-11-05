@@ -1,0 +1,927 @@
+# MASTER PROMPT — FAMILIA Fashion Ecommerce Website
+
+## 1. YOUR ROLE AND MAIN OBJECTIVE
+
+Act as a senior UI/UX designer, Figma design-system specialist, frontend architect, ecommerce developer, accessibility specialist, SEO engineer, and performance optimization expert.
+
+Build a complete, premium, responsive, family-fashion ecommerce website for the brand **FAMILIA — Fashion for Everyone**, using the exact uploaded reference image as the primary visual source of truth.
+
+The uploaded image is the FINAL APPROVED DESIGN. Reproduce its overall composition, layout, section order, brand identity, colors, typography, imagery style, card proportions, borders, spacing, and visual hierarchy as closely as technically possible.
+
+Do not redesign it according to your own preferences. Do not replace it with a generic ecommerce template. Do not omit sections, simplify the design, invent a different brand identity, or change the approved color palette.
+
+The reference image is a design presentation board containing 13 numbered website screens and a brand-guidelines sidebar. It is NOT one long webpage screenshot. Use it as the specification for implementing the actual website pages and components.
+
+**Priority order:**
+
+1. Match the uploaded reference image.
+2. Implement all 13 numbered design areas and their required functionality.
+3. Ensure responsive behavior across desktop, tablet, and mobile.
+4. Maintain accessibility, SEO, performance, maintainability, and functional correctness.
+5. Test the finished website and fix errors before declaring it complete.
+
+Do not stop after creating a static homepage mockup. Build the complete working frontend.
+
+---
+
+## 2. BRAND IDENTITY — STRICT REQUIREMENTS
+
+Brand name: FAMILIA
+
+Tagline: FASHION FOR EVERYONE
+
+Brand positioning: A modern, stylish, family-focused clothing store serving different age groups and fashion preferences from one website.
+
+Brand logo:
+
+- Use the approved FAMILIA logo shown in the uploaded reference.
+- The symbol is an elegant interlocking “F” and “S” serif monogram with a small coral four-point sparkle.
+- The wordmark reads FAMILIA in refined uppercase serif lettering.
+- The tagline reads FASHION FOR EVERYONE beneath the wordmark.
+- Use deep teal for the primary lettering and coral for the small sparkle.
+- Do not use a leaf icon or botanical logo.
+- Do not use NOVA, THREAD & CO., or any other brand name.
+- Do not replace the monogram with a random icon.
+- Keep the logo proportions and clear space consistent.
+- Use a clean SVG logo asset if possible, with a high-quality responsive rendering.
+- If the exact logo asset is unavailable, recreate it carefully using vector shapes and typography; do not use a low-resolution screenshot as the permanent logo.
+
+Brand message:
+“One Brand. Every Generation.”
+
+Supporting brand message:
+“Style. Comfort. Together.”
+
+The website must feel like one cohesive fashion brand for women, men, children, babies, and families.
+
+---
+
+## 3. COLOR PALETTE — DO NOT SUBSTITUTE
+
+Use the following reference-matched working palette consistently throughout the website:
+
+- Ice Blue: #CFE6F3
+- Mint Green: #B8DED0
+- Pale Grey: #D9E2E2
+- Coral Accent: #FF8F86
+- Deep Teal: #477C82
+
+Additional supporting colors:
+
+- White: #FFFFFF
+- Soft off-white: #F8FBFA
+- Primary text: #254653
+- Secondary text: #607985
+- Light border: #D9E8EC
+- Subtle surface: #F0F7F8
+
+These are working design tokens inspired by the reference image. Preserve the visual appearance of the reference rather than treating these values as proof of exact pixel sampling.
+
+Color usage:
+
+- White and soft off-white should be the dominant surfaces.
+- Ice blue and pale grey should provide subtle section backgrounds.
+- Mint green should support secondary surfaces and decorative elements.
+- Deep teal should be used for primary text, important icons, selected controls, and primary buttons.
+- Coral should be used sparingly for sale labels, promotional accents, and selected calls to action.
+
+Do not introduce black-heavy, dark-blue-heavy, dark-green-heavy, gold-heavy, pink-heavy, or purple-heavy styling.
+
+Do not introduce random gradients or unrelated accent colors.
+
+Maintain consistent contrast between text and backgrounds.
+
+---
+
+## 4. TYPOGRAPHY AND DESIGN SYSTEM
+
+Use:
+
+- Playfair Display for headings, editorial headlines, and selected brand statements.
+- Poppins for body text, navigation, buttons, forms, product metadata, and supporting content.
+
+Implement a reusable typography system:
+
+- Large editorial hero headings.
+- Medium section headings.
+- Compact product titles.
+- Clear body copy.
+- Small but legible metadata.
+- Consistent font weights and line heights.
+
+Use responsive typography with CSS clamp() where appropriate.
+
+Component styling:
+
+- Softly rounded cards and image containers.
+- Rounded buttons with consistent heights and padding.
+- Thin pale-blue borders.
+- Very subtle shadows.
+- Clean white surfaces.
+- Carefully aligned grids.
+- Consistent spacing and icon sizing.
+- Smooth but restrained hover effects.
+- Clear focus indicators for keyboard users.
+
+Do not use sharp, heavy borders, excessive shadows, random border radii, oversized decorative elements, or inconsistent spacing.
+
+Use a centralized design-token system for colors, typography, spacing, radii, shadows, and transitions.
+
+---
+
+## 5. REQUIRED TECHNOLOGY STACK
+
+Use the following technologies where compatible with the generated project:
+
+- Semantic HTML5.
+- CSS3.
+- JavaScript.
+- React.
+- TypeScript.
+- Tailwind CSS.
+- GSAP for selected advanced animations.
+- GitHub for version control.
+- Vercel for deployment.
+
+Astro may be used if the project environment supports it and it provides a clear SEO or performance benefit. Do not introduce an incompatible framework or rewrite the application unnecessarily.
+
+jQuery and Bootstrap are technologies in the intended learning stack, but do not combine them unnecessarily with React and Tailwind. Prefer React-managed interactions and Tailwind-based styling in this project. If jQuery or Bootstrap is required for a specific reason, isolate it and avoid conflicting DOM manipulation, CSS resets, or duplicated component systems.
+
+XML may be used for appropriate structured-data or data-exchange tasks where genuinely useful; do not create meaningless XML files solely to claim that XML was used.
+
+Use the existing project scaffold and package manager. Inspect the current project files before changing dependencies or build configuration.
+
+Do not replace working project configuration without a clear technical reason.
+
+Use reusable, typed components and maintain a clean, understandable folder structure.
+
+---
+
+## 6. WEBSITE STRUCTURE AND GLOBAL NAVIGATION
+
+Create a complete ecommerce website with the following main navigation:
+
+- Home
+- Women
+- Men
+- Kids
+- Baby
+- Teens
+- Shoes
+- Accessories
+- Sale
+
+Also include appropriate search, account, wishlist, and shopping-bag/cart icons.
+
+The desktop navigation must be compact, clean, and similar to the uploaded design. Implement a functional mega menu that opens on hover where appropriate and on click for reliable keyboard and touch interaction.
+
+The mobile navigation must use a functional menu drawer.
+
+The header should remain consistent across all pages. Do not create unrelated headers for different categories.
+
+All navigation links must lead to actual implemented routes or meaningful sections. Do not leave dead links or buttons that do nothing.
+
+---
+
+# 7. IMPLEMENT ALL 13 NUMBERED DESIGN AREAS
+
+## SECTION 1 — HOMEPAGE / HERO SECTION
+
+Reproduce the top-left website screen from the reference.
+
+Layout:
+
+- Compact header with the FAMILIA logo.
+- Main navigation and search, account, wishlist, and cart icons.
+- Large family lifestyle hero image.
+- Editorial text on the left and family photography on the right.
+- Heading: “Style for Every Generation”.
+- Supporting text: “Modern looks for every member of your family. Comfort, quality and style — all in one place.”
+- Primary CTA: “Shop Now”.
+- Secondary CTA: “Explore Collections”.
+- Subtle carousel controls where needed.
+
+Below the hero:
+
+- A horizontal category shortcut row with illustrated icons.
+- Women, Men, Kids, Baby, Teens, Shoes, Accessories, and Sale.
+- Short category labels and clear navigation.
+
+Important:
+The family image must be visually prominent and must not overlap or obscure the headline or buttons. Maintain the reference's spacious, light appearance.
+
+Implement functional hero controls if a carousel is included. Avoid unnecessary automatic movement and respect reduced-motion preferences.
+
+## SECTION 2 — SHOP BY CATEGORY / MEGA MENU
+
+Implement the full category navigation shown in the reference.
+
+Include:
+
+- Women
+- Men
+- Kids
+- Baby
+- Teens
+- Shoes
+- Accessories
+- Sale
+
+When the user opens a category, display relevant subcategories, such as:
+
+- Women: Dresses, Tops, Jeans, Co-ords, Activewear, Lingerie, Plus Size.
+- Men: Shirts, T-shirts, Jeans, Trousers, Jackets, Activewear.
+- Kids: Boys, Girls, Clothing Sets, Dresses, T-shirts, Trousers.
+- Baby: Newborn, Baby Clothing, Rompers, Baby Sets.
+- Teens: Casualwear, Dresses, Tops, Jeans, Streetwear.
+- Shoes: Sneakers, Casual Shoes, Formal Shoes, Sandals.
+- Accessories: Bags, Belts, Caps, Sunglasses.
+
+Include a featured-category area with relevant product images.
+
+Use a compact grid, soft borders, and clean typography.
+
+Interactions:
+
+- Open and close the mega menu.
+- Support keyboard focus and Escape-to-close.
+- Ensure the menu does not trap keyboard users.
+- Navigate to the relevant category page.
+- Close the menu appropriately on mobile.
+
+## SECTION 3 — PRODUCT DETAILS PAGE
+
+Create a full product detail page matching the reference's image gallery and information layout.
+
+Include:
+
+- Breadcrumb navigation.
+- Vertical thumbnail gallery.
+- Large primary product image.
+- Product name.
+- Rating and review count, using realistic demo data clearly treated as sample data.
+- Current price and optional original price.
+- Discount badge where applicable.
+- Available color swatches.
+- Available sizes.
+- Size guide.
+- Quantity selector.
+- Add to Cart.
+- Add to Wishlist.
+- Product Details tab.
+- Shipping & Returns tab.
+- Reviews tab.
+- Product description and fabric information.
+- Related products.
+
+Interactions:
+
+- Clicking a thumbnail changes the main image.
+- Selecting a color or size updates the selected variant.
+- The user cannot add an unavailable or unselected size where a size is required.
+- Quantity controls work correctly.
+- Adding a product updates the cart state and visible cart count.
+- Wishlist toggles correctly.
+- Product tabs display the correct content.
+- Show clear success, loading, and error feedback where applicable.
+
+Do not invent verified reviews, certifications, stock guarantees, or delivery promises. Use clearly labelled sample content for the portfolio demo.
+
+## SECTION 4 — ABOUT US
+
+Reproduce the About Us screen shown in the reference.
+
+Layout:
+
+- Small introductory label.
+- Heading: “More Than Just Clothing — It’s Family.”
+- Brand-story paragraph.
+- Family lifestyle image.
+- CTA: “Our Story”.
+- Four compact metric cards below.
+
+The metric cards should follow the visual layout of the reference. If using numbers such as years, customers, countries, or satisfaction, label them as illustrative demo statistics unless they are verified.
+
+Use clean typography, a light background, a soft image border, and restrained decorative shapes.
+
+The CTA must lead to the actual About page or the complete brand story section.
+
+## SECTION 5 — KIDS & BABY COLLECTION
+
+Create a dedicated Kids & Baby collection screen.
+
+Include:
+
+- A wide children/family lifestyle banner.
+- Heading: “Little Looks, Big Smiles.”
+- Supporting copy about comfortable clothing for children.
+- Shop Kids and Shop Baby CTAs.
+- Product cards for Boys, Girls, Baby, and Newborn.
+- Additional relevant product listings below.
+
+Use cheerful product photography while retaining the approved palette and typography.
+
+Provide age-appropriate category filters and size options.
+
+Do not use imagery that makes the interface visually cluttered or inconsistent with the rest of the website.
+
+## SECTION 6 — MEN'S COLLECTION
+
+Create the Men's Collection page from the reference.
+
+Include:
+
+- Wide male fashion hero image.
+- Heading: “Modern Styles for Modern Men.”
+- Supporting text.
+- Shop Men CTA.
+- Category shortcuts for Shirts, T-shirts, Jeans, Jackets, and Footwear.
+- Product grid with images, names, prices, color choices, and wishlist icons.
+
+Include appropriate product filters and sorting.
+
+Ensure the men's page feels like part of FAMILIA, not a different brand.
+
+## SECTION 7 — WOMEN'S COLLECTION
+
+Create the Women's Collection page from the reference.
+
+Include:
+
+- Wide editorial fashion banner.
+- Heading: “Elegant. Confident. You.”
+- Supporting copy.
+- Shop Women CTA.
+- Category shortcuts for Dresses, Tops, Jeans, Co-ords, and Activewear.
+- Product cards with image, name, price, available colors, and wishlist control.
+
+Support category filtering, sorting, product navigation, and responsive grids.
+
+The design must preserve the reference's clean, spacious, premium fashion aesthetic.
+
+## SECTION 8 — FAMILY MATCHING / LOOKBOOK
+
+Implement the family-matching editorial section.
+
+Include:
+
+- A wide family lifestyle image.
+- Heading: “Matching Styles. Stronger Bonds.”
+- Supporting copy about coordinated family outfits.
+- CTA: “Explore Lookbook”.
+- Multiple lookbook thumbnails.
+- Collection labels such as Family Looks, Casual Vibes, Beach Ready, and Festive Wear.
+
+Create a dedicated lookbook page or working collection route.
+
+Where possible, implement a “Shop the Look” experience that links the displayed outfits to actual demo product listings.
+
+Use image-led storytelling and restrained scroll-triggered animation.
+
+## SECTION 9 — CART & WISHLIST
+
+The reference displays the cart and wishlist together in a compact layout. Implement both as proper functional shopping features.
+
+Cart requirements:
+
+- Product thumbnail.
+- Product name.
+- Selected size and color.
+- Unit price.
+- Quantity controls.
+- Remove item action.
+- Subtotal.
+- Total.
+- Continue Shopping link.
+- Proceed to Checkout CTA.
+
+Wishlist requirements:
+
+- Saved product thumbnails.
+- Product names and prices.
+- Remove-from-wishlist control.
+- Move to Cart or Add to Cart action.
+- Empty wishlist state.
+
+State requirements:
+
+- Cart and wishlist must share consistent product data.
+- Quantity changes update totals.
+- Removing an item updates the interface.
+- Cart count updates everywhere.
+- Persist cart and wishlist using localStorage for the frontend demo.
+- Handle empty states, invalid stored data, and unavailable variants gracefully.
+
+Do not claim that an order has been placed merely because the user clicks a checkout button.
+
+If no payment or commerce backend is configured, create a clearly labelled demo checkout flow and explain that real payment processing is not connected.
+
+## SECTION 10 — STYLE GUIDE / BLOG
+
+Create the fashion editorial section shown in the reference.
+
+Include:
+
+- Heading: “Style Guide & Blog”.
+- Short introduction.
+- A View All link.
+- Three or more editorial article cards.
+- Article image.
+- Article title.
+- Date and short excerpt.
+- Read More link.
+
+Suggested topics:
+
+- Seasonal Outfit Ideas for Kids.
+- Best Travel Looks for the Whole Family.
+- How to Style Jeans for Every Generation.
+- Sustainable Fashion Choices.
+
+Implement accessible article pages or meaningful article-detail routes.
+
+For SEO:
+
+- Give every article a unique title and description.
+- Use semantic article markup.
+- Use descriptive image alt text.
+- Provide a sensible heading hierarchy.
+- Do not generate empty article routes.
+
+## SECTION 11 — NEWSLETTER & CONTACT
+
+Reproduce the combined newsletter and contact area.
+
+Newsletter:
+
+- Heading: “Join Our Family”.
+- Short supporting text.
+- Email input.
+- Subscribe button.
+- Clear validation and submission feedback.
+
+Contact:
+
+- Heading: “Get in Touch”.
+- Name field.
+- Email field.
+- Message field.
+- Send Message button.
+- Appropriate contact-information placeholders.
+- Social links only where valid destinations exist.
+
+Validation requirements:
+
+- Required fields cannot be submitted empty.
+- Name must not contain numbers.
+- Email must follow a valid email pattern.
+- Message must not be empty.
+- Trim leading and trailing whitespace.
+- Use sensible length limits.
+- Display helpful inline error messages.
+- Associate errors with their respective fields.
+- Use HTML constraints and JavaScript validation.
+- Use appropriate regular expressions without rejecting valid international names or legitimate email addresses unnecessarily.
+
+Do not claim a newsletter subscription or message has been sent to a server unless a real backend or provider is connected.
+
+If no backend is configured, provide an honest demo response and keep the integration point ready for future implementation.
+
+## SECTION 12 — ACCOUNT / SIGN IN / CREATE ACCOUNT
+
+Create the account screen matching the reference's light, two-column design.
+
+Include:
+
+- FAMILIA logo.
+- Sign In form.
+- Create Account form or accessible tab-based switch.
+- Email field.
+- Password field.
+- Show/hide password button.
+- Remember Me where appropriate.
+- Forgot Password link.
+- Sign In and Create Account buttons.
+- Clear field-level validation.
+
+Validation:
+
+- Required fields.
+- Correct email format.
+- Sensible password rules.
+- Inline error and success states.
+- Keyboard accessibility.
+
+Do not store passwords in localStorage or pretend a user is securely authenticated without a proper authentication system.
+
+If authentication is not configured, implement a clearly labelled frontend demonstration and keep the interface ready for a real authentication provider.
+
+## SECTION 13 — RESPONSIVE MOBILE EXPERIENCE
+
+The reference contains mobile previews of the home and shop screens.
+
+Implement responsive layouts for the entire website, not only the homepage.
+
+Requirements:
+
+- Desktop navigation transforms into a mobile menu.
+- Search, account, wishlist, and cart remain accessible.
+- Product grids adapt to available width.
+- Product details stack appropriately.
+- Filters become accessible mobile drawers or expandable panels.
+- Forms remain usable without horizontal scrolling.
+- Buttons and touch targets are comfortably sized.
+- No overlapping text or clipped images.
+- No unintended horizontal overflow.
+- Mobile cart, wishlist, and account pages remain fully usable.
+
+Test at approximately 360px, 390px, 430px, 768px, 1024px, 1280px, and 1440px viewport widths.
+
+These are target test sizes, not separate fixed-width layouts. Use fluid and responsive design principles.
+
+---
+
+## 8. SHARED ECOMMERCE FUNCTIONALITY
+
+Implement a coherent product data model for all categories.
+
+Each product should support, where relevant:
+
+- Unique product ID.
+- Product name.
+- Slug.
+- Category and subcategory.
+- Price.
+- Optional original price.
+- Images.
+- Available sizes.
+- Available colors.
+- Description.
+- Fabric or material details.
+- Stock status for the demo.
+- Tags.
+- Rating and review metadata where available.
+
+Do not duplicate product data independently across the homepage, category pages, product details, cart, and wishlist.
+
+Use reusable components such as:
+
+- Header.
+- Desktop navigation.
+- Mega menu.
+- Mobile navigation drawer.
+- Breadcrumbs.
+- Category shortcut card.
+- Product card.
+- Product grid.
+- Filter panel.
+- Sort control.
+- Color swatch selector.
+- Size selector.
+- Product image gallery.
+- Cart item.
+- Wishlist item.
+- Newsletter form.
+- Contact form.
+- Account form.
+- Footer.
+
+All controls must perform their advertised actions.
+
+Every product card should open the correct product details. Every Add to Cart button must update the shared cart state. Every wishlist button must update the shared wishlist state.
+
+Provide loading, empty, success, and error states wherever appropriate.
+
+Use realistic, consistent demo products and prices, but do not present invented information as verified real-world business data.
+
+---
+
+## 9. IMAGES AND VISUAL FIDELITY
+
+The image is a visual design reference, not an instruction to use a single screenshot as the website.
+
+Use individual, high-quality fashion images for:
+
+- Family hero.
+- Women’s clothing.
+- Men’s clothing.
+- Kids’ clothing.
+- Baby clothing.
+- Shoes and accessories.
+- Product cards.
+- Lookbook.
+- Blog articles.
+
+Image requirements:
+
+- Maintain consistent photography quality and visual tone.
+- Use image crops and aspect ratios that match each card.
+- Use object-fit: cover where appropriate.
+- Avoid stretching, blurry images, broken images, or mismatched product photographs.
+- Use suitable responsive image sizes and modern formats where supported.
+- Reserve image space to prevent layout shifts.
+- Use lazy loading for below-the-fold images.
+- Give informative images meaningful alt text.
+- Use empty alt text for genuinely decorative images.
+
+Do not use the entire reference board as a page background.
+
+Do not use one family photo for every category.
+
+Do not create an interface that looks like a screenshot pasted into a webpage. Rebuild the actual interface using real components, HTML, CSS, and functional interactions.
+
+If an external image service is unavailable, use reliable local assets or a clearly identified fallback rather than leaving broken image URLs.
+
+---
+
+## 10. GSAP ANIMATIONS AND INTERACTIONS
+
+Use GSAP selectively to reproduce the polished motion suggested by the design.
+
+Appropriate animations:
+
+- Hero text entrance.
+- Subtle image reveal.
+- Section content entering during scroll.
+- Small decorative parallax effects.
+- Product image hover transitions.
+- Lookbook image reveals.
+- Smooth, restrained CTA interactions.
+
+Rules:
+
+- Animation must never interfere with content visibility or usability.
+- Avoid excessive motion, large unexpected movements, or long delays.
+- Do not hide the whole website until an animation completes.
+- Ensure essential content remains available if JavaScript fails.
+- Respect prefers-reduced-motion.
+- Clean up GSAP timelines, ScrollTriggers, and event listeners when components unmount.
+- Avoid unnecessary scroll hijacking.
+- Do not animate every element independently.
+
+Use CSS transitions for simple hover effects. Use GSAP only where it adds meaningful value.
+
+---
+
+## 11. SEO — IMPLEMENT AND VERIFY
+
+SEO must be considered throughout the architecture, not added as an afterthought.
+
+Technical SEO:
+
+- Use semantic HTML5.
+- Use a meaningful page title for every route.
+- Provide unique meta descriptions.
+- Configure canonical URLs appropriately for the deployment domain.
+- Generate a valid XML sitemap.
+- Configure robots.txt without accidentally blocking public pages or essential assets.
+- Use clean, descriptive URLs.
+- Add Open Graph and social-sharing metadata where appropriate.
+- Use meaningful internal links.
+- Use breadcrumb navigation and appropriate structured data.
+- Ensure product, category, article, and brand content is present in the rendered page.
+- Avoid duplicate titles and descriptions.
+- Handle nonexistent routes with a proper 404 page.
+- Avoid broken links and empty indexable pages.
+- Ensure the mobile experience is usable and crawlable.
+
+Structured data:
+
+- Use valid JSON-LD for appropriate entities such as Organization, WebSite, BreadcrumbList, Product, and Article.
+- Add Product offers, prices, availability, and review information only when the underlying data genuinely supports them.
+- Never fabricate ratings, reviews, business addresses, shipping policies, or availability.
+- Validate structured data before release.
+- Do not add every schema type to every page.
+
+For an Astro-based implementation, use appropriate prerendering or static generation for public product, category, and article pages where feasible. If React is used as the main application framework, use an appropriate prerendering or server-rendering strategy when supported by the environment.
+
+Do not assume that a client-only page automatically provides the best SEO result.
+
+SEO content must remain readable and useful to humans. Do not keyword-stuff titles, headings, alt text, or descriptions.
+
+Do not promise a specific Google ranking or guarantee that all SEO scores will be 100%.
+
+---
+
+## 12. ACCESSIBILITY — FOLLOW WCAG BEST PRACTICES
+
+Target WCAG 2.2 AA practices wherever applicable.
+
+Requirements:
+
+- Semantic landmarks.
+- Correct heading hierarchy.
+- Accessible navigation.
+- Full keyboard operation.
+- Visible focus indicators.
+- Sufficient color contrast.
+- Accessible labels for all form controls.
+- Helpful validation errors.
+- Accessible dialogs and drawers.
+- Correct focus handling when opening and closing modals.
+- Escape-to-close where appropriate.
+- Meaningful button names.
+- Accessible product selectors.
+- No interaction available only through hover.
+- Screen-reader-friendly cart and wishlist feedback.
+- Respect reduced motion.
+- Avoid using color as the only indication of selection or errors.
+- Use proper status messages for dynamic changes.
+- Ensure text remains readable at increased zoom.
+
+Do not remove outlines without replacing them with a clearly visible focus style.
+
+Use automated accessibility checks and manual keyboard testing.
+
+---
+
+## 13. PERFORMANCE AND CORE WEB VITALS
+
+Build for fast loading and stable rendering.
+
+Requirements:
+
+- Avoid unnecessary dependencies.
+- Avoid duplicate UI libraries.
+- Split code where appropriate.
+- Lazy-load noncritical images.
+- Optimize image formats and responsive sizes.
+- Reserve image dimensions to reduce layout shifts.
+- Avoid excessive animation and JavaScript.
+- Prevent avoidable layout shifts.
+- Minimize blocking resources.
+- Load fonts efficiently.
+- Avoid unnecessary client-side rendering for static content.
+- Remove console errors and unnecessary debug logs.
+- Avoid memory leaks and duplicated event listeners.
+
+Aim for good Core Web Vitals and, where practical, Lighthouse scores of 90 or higher in Performance, Accessibility, Best Practices, and SEO.
+
+These are targets to test, not guaranteed outcomes. Fix the actual issues reported by the tools rather than claiming scores without running them.
+
+---
+
+## 14. SECURITY AND FORM HANDLING
+
+Never expose secret API keys, private tokens, or credentials in client-side code.
+
+Never collect payment-card details in a custom demo form without a proper payment provider.
+
+Use server-side validation for real submissions and authenticated actions when a backend is introduced.
+
+Frontend validation is not a substitute for server validation.
+
+Do not create fake authentication, fake order confirmation, or fake subscription success messages that imply real server-side operations have occurred.
+
+Keep all demo limitations clearly identified.
+
+---
+
+## 15. IMPLEMENTATION WORKFLOW
+
+Before writing code:
+
+1. Inspect the uploaded reference image carefully.
+2. Inspect the current project scaffold and dependencies.
+3. Identify the routes, components, assets, and styling architecture needed.
+4. Define the design tokens and reusable components.
+5. Create a consistent product data model.
+6. Establish the shared state for cart and wishlist.
+
+Then implement in this order:
+
+Phase 1:
+
+- Brand identity.
+- Global styles.
+- Typography.
+- Header and navigation.
+- Homepage and hero.
+- Category shortcuts.
+
+Phase 2:
+
+- Mega menu.
+- Category pages.
+- Product grids.
+- Filtering and sorting.
+- Product detail pages.
+
+Phase 3:
+
+- Kids and Baby collection.
+- Men's collection.
+- Women's collection.
+- Family lookbook.
+- About page.
+- Style guide and blog.
+
+Phase 4:
+
+- Cart.
+- Wishlist.
+- Account interface.
+- Newsletter.
+- Contact forms.
+- Validation and user feedback.
+
+Phase 5:
+
+- Mobile responsiveness.
+- GSAP animations.
+- SEO metadata and structured data.
+- Accessibility improvements.
+- Performance optimization.
+- Testing and deployment readiness.
+
+Do not stop after any phase while claiming the entire website is complete.
+
+---
+
+## 16. FINAL VERIFICATION CHECKLIST
+
+Before finishing, verify each item:
+
+### Design
+
+- [ ] FAMILIA branding matches the reference.
+- [ ] No leaf logo or previous brand names remain.
+- [ ] Correct pastel blue, mint, pale grey, coral, and teal palette.
+- [ ] Playfair Display and Poppins are applied consistently.
+- [ ] All 13 numbered design areas are implemented.
+- [ ] Correct image proportions and card layouts.
+- [ ] Consistent header, buttons, borders, and spacing.
+- [ ] No generic template redesign or missing sections.
+
+### Functionality
+
+- [ ] Navigation links work.
+- [ ] Mega menu opens and closes correctly.
+- [ ] Search produces useful results.
+- [ ] Category filters and sorting work.
+- [ ] Product gallery and variant selection work.
+- [ ] Add to Cart works.
+- [ ] Cart quantities and totals update correctly.
+- [ ] Wishlist works and persists.
+- [ ] Forms validate correctly.
+- [ ] Account demo is honest about authentication limitations.
+- [ ] Checkout clearly identifies whether it is a demo.
+
+### Responsive behavior
+
+- [ ] Desktop layouts match the reference.
+- [ ] Tablet layouts are properly adapted.
+- [ ] Mobile navigation works.
+- [ ] Product details and forms fit narrow screens.
+- [ ] No unintended horizontal overflow.
+- [ ] Touch interactions are usable.
+
+### SEO
+
+- [ ] Unique titles and descriptions.
+- [ ] Correct heading hierarchy.
+- [ ] XML sitemap generated and valid.
+- [ ] robots.txt checked.
+- [ ] Canonical URLs configured correctly.
+- [ ] Valid structured data where applicable.
+- [ ] No broken internal links.
+- [ ] Public content is crawlable.
+- [ ] Images have appropriate alt attributes.
+
+### Accessibility and performance
+
+- [ ] Keyboard navigation tested.
+- [ ] Focus indicators visible.
+- [ ] Forms have accessible labels and errors.
+- [ ] Contrast checked.
+- [ ] Reduced-motion preference supported.
+- [ ] Images optimized.
+- [ ] Layout shifts minimized.
+- [ ] No critical console or build errors.
+- [ ] Lighthouse and accessibility results reviewed where tooling is available.
+
+Do not mark an item as verified unless it has actually been checked.
+
+---
+
+## 17. FINAL DELIVERY REQUIREMENTS
+
+Deliver the complete working FAMILIA website, not just a design explanation.
+
+Provide:
+
+- All implemented pages and reusable components.
+- A consistent responsive design.
+- Functional shopping interactions.
+- The required form validations.
+- SEO and accessibility implementation.
+- All necessary assets and configuration.
+- Clear instructions to run the project.
+- Clear instructions for deployment to Vercel.
+- A concise list of features that work.
+- An honest list of any integrations that still require API credentials or backend configuration.
+- A list of tests performed and any remaining limitations.
+
+If you cannot implement a feature because a backend, external service, or credential is missing, explain the limitation and implement the best appropriate frontend-ready alternative.
+
+**FINAL NON-NEGOTIABLE RULE:** The uploaded FAMILIA design reference is the approved visual specification. Preserve its brand, overall layout, color direction, typography, section order, image-led presentation, and visual hierarchy. Improve implementation quality without changing the design itself. Build the complete website carefully, verify it, and do not claim completion for features or tests that have not been implemented or checked.

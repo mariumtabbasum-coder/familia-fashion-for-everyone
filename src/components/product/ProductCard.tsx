@@ -1,0 +1,168 @@
+import React from 'react';
+import { Product } from '../../types';
+import { useEcommerce } from '../../context/EcommerceContext';
+import { Heart, Star, ShoppingBag, Eye } from 'lucide-react';
+
+interface ProductCardProps {
+  product: Product;
+  onQuickView?: (product: Product) => void;
+}
+
+export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
+  const { isInWishlist, toggleWishlist, addToCart, navigateTo } = useEcommerce();
+  const isFavorited = isInWishlist(product.id);
+
+  const handleCardClick = () => {
+    navigateTo(`/product/${product.slug}`);
+  };
+
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const defaultColor = product.colors[0];
+    const defaultSize = product.sizes[0] || 'M';
+    addToCart(product, defaultColor, defaultSize, 1);
+  };
+
+  const handleWishlistToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  };
+
+  const hasSecondaryImage = product.images.length > 1;
+
+  return (
+    <div
+      onClick={handleCardClick}
+      className="group bg-white rounded-2xl border border-[#D9E8EC] overflow-hidden hover:border-[#477C82]/30 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer"
+    >
+      {/* Product Image Container with Secondary Hover Image Reveal - 3:4 portrait ratio prevents heads/dresses cropping */}
+      <div className="relative aspect-[3/4] bg-[#F0F7F8] overflow-hidden">
+        {/* Primary Image */}
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          referrerPolicy="no-referrer"
+          className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out ${
+            hasSecondaryImage ? 'group-hover:scale-105' : 'group-hover:scale-105'
+          }`}
+          loading="lazy"
+        />
+
+        {/* Secondary Image Reveal on Hover */}
+        {hasSecondaryImage && (
+          <img
+            src={product.images[1]}
+            alt={`${product.name} alternate view`}
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 w-full h-full object-cover object-top opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
+
+        {/* Badges - compact on mobile so model is not covered */}
+        <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-col gap-1 items-start z-10 pointer-events-none">
+          {product.discountPercentage && (
+            <span className="bg-[#FF8F86] text-white text-[10px] sm:text-[11px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-xs">
+              -{product.discountPercentage}%
+            </span>
+          )}
+          {product.isNew && !product.discountPercentage && (
+            <span className="bg-[#B8DED0] text-[#254653] text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-xs">
+              NEW
+            </span>
+          )}
+        </div>
+
+        {/* Wishlist Button with Heart Animation */}
+        <button
+          onClick={handleWishlistToggle}
+          className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 z-10 cursor-pointer ${
+            isFavorited
+              ? 'bg-white text-[#FF8F86] shadow-md scale-105'
+              : 'bg-white/85 text-gray-500 hover:text-[#FF8F86] hover:bg-white hover:scale-110'
+          }`}
+          aria-label={isFavorited ? 'Remove from wishlist' : 'Save to wishlist'}
+        >
+          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform ${isFavorited ? 'fill-[#FF8F86]' : ''}`} />
+        </button>
+
+        {/* Hover Quick Actions Bar with Smooth Slide-Up */}
+        <div className="absolute inset-x-0 bottom-2.5 px-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-10">
+          <button
+            onClick={handleQuickAdd}
+            className="flex-1 bg-[#477C82] hover:bg-[#39656a] active:scale-98 text-white py-2 px-3 rounded-xl text-xs font-semibold shadow-md flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            Quick Add
+          </button>
+          {onQuickView && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onQuickView(product);
+              }}
+              className="bg-white/95 hover:bg-white active:scale-95 text-[#254653] p-2 rounded-xl text-xs shadow-md transition-all cursor-pointer"
+              title="Quick View"
+              aria-label="Quick preview"
+            >
+              <Eye className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Info Body */}
+      <div className="p-2.5 sm:p-4 flex flex-col flex-1 justify-between bg-white">
+        <div>
+          {/* Category & Rating */}
+          <div className="flex items-center justify-between text-[10px] sm:text-xs text-[#607985] mb-1">
+            <span className="uppercase tracking-wider font-semibold text-[9px] sm:text-[10px] text-[#477C82] truncate max-w-[65%]">
+              {product.subcategory}
+            </span>
+            <div className="flex items-center text-amber-500 font-medium shrink-0">
+              <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-amber-400 stroke-amber-400 mr-1" />
+              <span className="tabular-nums">{product.rating}</span>
+              <span className="text-gray-400 text-[9px] sm:text-[10px] ml-0.5 tabular-nums">({product.reviewsCount})</span>
+            </div>
+          </div>
+
+          {/* Title - allow 2 lines so names aren't cropped awkwardly */}
+          <h3 className="font-serif font-bold text-xs sm:text-sm text-[#254653] group-hover:text-[#477C82] line-clamp-2 leading-snug transition-colors">
+            {product.name}
+          </h3>
+        </div>
+
+        {/* Pricing & Colors */}
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-[#D9E8EC]/60 flex items-center justify-between">
+          <div className="flex items-baseline gap-1 sm:gap-1.5">
+            <span className="text-sm sm:text-base font-bold text-[#254653] tabular-nums">
+              ${product.price.toFixed(2)}
+            </span>
+            {product.originalPrice && (
+              <span className="text-xs text-gray-400 line-through tabular-nums">
+                ${product.originalPrice.toFixed(2)}
+              </span>
+            )}
+          </div>
+
+          {/* Available Color Indicators */}
+          <div className="flex items-center -space-x-1">
+            {product.colors.slice(0, 3).map((col, idx) => (
+              <span
+                key={`${col.name}-${idx}`}
+                className="w-3.5 h-3.5 rounded-full border border-white shadow-xs"
+                style={{ backgroundColor: col.hex }}
+                title={col.name}
+              />
+            ))}
+            {product.colors.length > 3 && (
+              <span className="text-[10px] text-[#607985] pl-2 font-medium tabular-nums">
+                +{product.colors.length - 3}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
